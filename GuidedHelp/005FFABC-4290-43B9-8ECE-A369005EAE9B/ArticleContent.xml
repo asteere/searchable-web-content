@@ -1,0 +1,37 @@
+<Article>
+<Title>DISH Network Hopper: Troubleshoot Network Connection</Title>
+<SubTitle>Restart Your DVR Receiver's Internet Connectivity</SubTitle>
+<Intro>
+<Paragraph>If your Hopper receiver is having trouble connecting to the Internet because of connectivity problems on your home network, a recent power outage, or some other reason, you may need to reset its connection to the Internet. Follow the solution below to learn how. </Paragraph>
+</Intro>
+<Solution>
+<Image uri="/image/1/1/279015HopperHDMI00Side.jpg"/>
+<Step>
+<Paragraph>With your TV and receiver on, press "MENU".</Paragraph>
+</Step>
+<Image uri="/image/2/6/235451DISHHopperNetwork05Menu.jpg">Hopper Remote - Menu Button</Image>
+<Step>
+<Paragraph>Navigate to "Settings", and then press "Select" on your remote.</Paragraph>
+</Step>
+<Image uri="/image/2/6/235451DISHHopperNetwork06Settings.jpg"/>
+<Step>
+<Paragraph>Navigate to "Network Setup", and then press "Select".</Paragraph>
+</Step>
+<Image uri="/image/2/6/235451DISHHopperNetwork07Network.jpg"/>
+<Step>
+<Paragraph>Navigate to "Broadband", and then press "Select".</Paragraph>
+</Step>
+<Image uri="/image/4/1/235451DISHHopperNetwork08Broadband.jpg"/>
+<Step>
+<Paragraph>Navigate to "Reset Connection", and press "Select".</Paragraph>
+</Step>
+<Image uri="/image/7/4/235534DISHHopperInternet05Reset.jpg"/>
+<Step>
+<Paragraph>Ensure that your "DHCP Acquired", "Server Connection", and "Internet Connection" all have "OK" statuses next to them.</Paragraph>
+</Step>
+<Image uri="/image/9/9/235451DISHHopperNetwork09Connectivity.jpg"/>
+</Solution>
+<Completion>
+<Paragraph>You should now know how to reset your DVR's connection to the Internet. You should now have access to your receiver using DISH Anywhere and be able to rent movies using Blockbuster @Home from your TV.</Paragraph>
+</Completion>
+</Article>

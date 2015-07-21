@@ -1,0 +1,1079 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <gc:DecisionTree Key="Modem-Motorola-SBG6580-Hopper913">
+    <gc:Settings>
+      <gc:StartState Link="IntroductionState"/>
+    </gc:Settings>
+    <gc:States>
+      <!--######################################################################################################################## STATES-->
+      <!--##### Intro State -->
+      <gc:State Key="IntroductionState">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewIntro"/>
+        <gc:DiagramReplace ReplaceWith="IntroDiagram"/>
+        <gc:Question>Resetting the Hopper did not restore your internet connection.br;Follow the guided steps to further troubleshoot your internet connection.</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="CheckModemPowerLEDState01">Begin</gc:Answer>
+          <gc:Answer Action="Exit" Link="">Cancel</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--############################################################  POWER LED STATES-->
+      <!--##### Power LED Device State 01 -->
+      <gc:State Key="CheckModemPowerLEDState01">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewIntro"/>
+        <gc:DiagramReplace ReplaceWith="ModemPowerLEDDiagram"/>
+        <gc:Question>Is the modem power indicator lit?</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="CheckWANLEDState00">Yes</gc:Answer>
+          <gc:Answer Action="GoToState" Link="CheckPowerCableConnectionTypeState">No</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--power cord Connection Type Question State -->
+      <gc:State Key="CheckPowerCableConnectionTypeState">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewIntro"/>
+        <gc:DiagramReplace ReplaceWith="ModemPowerConnectionTypeDiagram"/>
+        <gc:Question>What is the power source for your modem?</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="CheckModemPowerSourceState">Wall Outlet</gc:Answer>
+          <gc:Answer Action="GoToState" Link="CheckModemPowerStripConnection">Power Strip</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+
+
+      <!--############################################################ POWER WALL CONNECTION STATES-->
+      <!--power cord Wall Outlet State -->
+      <gc:State Key="CheckModemPowerSourceState">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewPowerLEDOn"/>
+        <gc:DiagramReplace ReplaceWith="ModemPowerLEDDiagram"/>
+        <gc:Question>Ensure the power cord is plugged into the wall outlet.br;Is the modem power indicator now lit?</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="CheckWANLEDState01">Yes</gc:Answer>
+          <gc:Answer Action="GoToState" Link="CheckModemPowerSourceToDeviceState">No</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--##### power cord Device State -->
+      <gc:State Key="CheckModemPowerSourceToDeviceState">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewPowerLEDOn"/>
+        <gc:DiagramReplace ReplaceWith="ModemPowerSourceToDeviceDiagram"/>
+        <gc:Question>Is the power cord connected to your modem?</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="CheckModemPowerLEDState03">Yes</gc:Answer>
+          <gc:Answer Action="GoToState" Link="ConnectModemPowerSourceDeviceState">No</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--##### power cord Connect Wall State -->
+      <gc:State Key="ConnectModemPowerSourceDeviceState">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewPowerNotConnected"/>
+        <gc:DiagramReplace ReplaceWith="ModemPowerSourceToDeviceDiagram"/>
+        <gc:Question>Ensure the power cord is plugged into the  modem's power port.br;Is the modem power indicator now lit?</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="CheckWANLEDState01">Yes</gc:Answer>
+          <gc:Answer Action="GoToState" Link="FaultyCableOrDeviceStatePOWER">No</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--############################################################ POWER STRIP CONNECTION STATES-->
+      <!--power cord Power Strip State -->
+      <gc:State Key="CheckModemPowerStripConnection">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewIntro"/>
+        <gc:DiagramReplace ReplaceWith="ModemPowerStripDiagram"/>
+        <gc:Question>Ensure the modem's power cord is plugged in to the power strip and the power strip is plugged into the wall outlet and powered on?br;Is the modem power indicator now lit?</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="CheckWANLEDState01">Yes</gc:Answer>
+          <gc:Answer Action="GoToState" Link="CheckModemPowerStripToDeviceState">No</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--##### Power Strip Cable To Device State -->
+      <gc:State Key="CheckModemPowerStripToDeviceState">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewPowerLEDOn"/>
+        <gc:DiagramReplace ReplaceWith="ModemPowerSourceToDeviceDiagram"/>
+        <gc:Question>Is the power cord connected to your modem?</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="CheckModemPowerLEDState03">Yes</gc:Answer>
+          <gc:Answer Action="GoToState" Link="ConnectModemPowerSourceDeviceState">No</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--############################################################ FINAL POWER LED STATES-->
+      <!--##### Power LED Device State 03 -->
+      <gc:State Key="CheckModemPowerLEDState03">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewPowerConnected"/>
+        <gc:DiagramReplace ReplaceWith="ModemPowerLEDDiagram"/>
+        <gc:Question>Is the modem power indicator now lit?</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="CheckWANLEDState01">Yes</gc:Answer>
+          <gc:Answer Action="GoToState" Link="FaultyCableOrDeviceStatePOWER">No</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--############################################################ WAN LED STATES-->
+      <gc:State Key="CheckWANLEDState01">
+        <!--##### Check WAN LEDs State 01 -->
+        <gc:DiagramReplace ReplaceWith="ModemOverviewPowerConnected"/>
+        <gc:DiagramReplace ReplaceWith="WANLEDDiagram"/>
+        <gc:Question>Wait for the modem to restart - this may take up to 60 seconds.br;Once restarted, are the receive, send, and online indicators now flashing / lit?</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="CheckWIFILINKLEDState01">Yes</gc:Answer>
+          <gc:Answer Action="GoToState" Link="CheckModemInternetSourceState">No</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <gc:State Key="CheckWANLEDState00">
+        <!--##### Check WAN LEDs State 00 -->
+        <gc:DiagramReplace ReplaceWith="ModemOverviewPowerConnected"/>
+        <gc:DiagramReplace ReplaceWith="WANLEDDiagram"/>
+        <gc:Question>Are the receive, send, and online indicators flashing / lit?</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="CheckWIFILINKLEDState01">Yes</gc:Answer>
+          <gc:Answer Action="GoToState" Link="CheckModemInternetSourceState">No</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--##### Check Internet Source State -->
+      <gc:State Key="CheckModemInternetSourceState">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewPowerConnected"/>
+        <gc:DiagramReplace ReplaceWith="ModemInternetSourceDiagram"/>
+        <gc:Question>Ensure the coaxial cable is securely connected to a cable outlet.br;Are the receive, send, and online indicators now flashing / lit?</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="CheckWIFILINKLEDState01">Yes</gc:Answer>
+          <gc:Answer Action="GoToState" Link="CheckModemInternetSourceDeviceState">No</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--##### Check Internet Source Device State -->
+      <gc:State Key="CheckModemInternetSourceDeviceState">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewWANLEDOn"/>
+        <gc:DiagramReplace ReplaceWith="ModemInternetSourceDeviceDiagram"/>
+        <gc:Question>Ensure the coaxial cable is securely connected to the modem?br;Are the receive, send, and online indicators now flashing / lit?</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="CheckWIFILINKLEDState01">Yes</gc:Answer>
+          <gc:Answer Action="GoToState" Link="DisconnectPowerCable">No</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--##### Disconnect power cord -->
+      <gc:State Key="DisconnectPowerCable">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewWANLEDOn"/>
+        <gc:DiagramReplace ReplaceWith="ModemPowerSourceToDeviceDiagram"/>
+        <gc:Question>Disconnect the power cord from the back of the modem for 10 seconds, then reconnect it. br;Wait for the modem to restart - this may take up to 60 seconds.br;Are the receive, send, and online indicators now flashing / lit?</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="CheckWIFILINKLEDState01">Yes</gc:Answer>
+          <gc:Answer Action="GoToState" Link="FaultyCableDeviceOrServiceWAN">No</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--############################################################ WIFI LINK LED STATES-->
+      <!--##### Check WIFI LINK LED State 01 -->
+      <gc:State Key="CheckWIFILINKLEDState01">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewWIFILEDToDeviceUknown"/>
+        <gc:DiagramReplace ReplaceWith="WIFILEDDiagram"/>
+        <gc:Question>Is the wireless indicator lit?</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="TestConnectionWiFi">Yes</gc:Answer>
+          <gc:Answer Action="GoToState" Link="CheckWirelessEnabledOnDeviceState">No</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--##### Check Wireless Enabled On Device State -->
+      <gc:State Key="CheckWirelessEnabledOnDeviceState">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewWIFILEDToDeviceUknown"/>
+        <gc:DiagramReplace ReplaceWith="IntroDiagram"/>
+        <gc:Question>Ensure wireless is enabled on your modem. Is the wireless indicator now lit?</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="GoToState" Link="TestConnectionWiFi">Yes</gc:Answer>
+          <gc:Answer Action="GoToState" Link="FaultyCableDeviceOrServiceWiFi">No</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!-- ############################################################ END States -->
+      <!--##### Faulty Cable Or Device POWER-->
+      <gc:State Key="FaultyCableOrDeviceStatePOWER">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewFaultyPOWER"/>
+        <gc:DiagramReplace ReplaceWith="FaultyCableOrDeviceDiagram"/>
+        <gc:Question>The troubleshooting steps failed to repair your connection.br;Please contact Comcast for further assistance.</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="Exit">Exit</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--##### Faulty Cable Device Or Service WAN-->
+      <gc:State Key="FaultyCableDeviceOrServiceWAN">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewFaultyWAN"/>
+        <gc:DiagramReplace ReplaceWith="FaultyCableDeviceOrServiceState"/>
+        <gc:Question>The troubleshooting steps failed to repair your connection.br;Please contact Comcast for further assistance.</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="Exit">Exit</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--##### Faulty Cable Device Or Service WiFi-->
+      <gc:State Key="FaultyCableDeviceOrServiceWiFi">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewFaultyWiFi"/>
+        <gc:DiagramReplace ReplaceWith="FaultyCableDeviceOrServiceState"/>
+        <gc:Question>The troubleshooting steps failed to repair your connection.br;Please contact Comcast for further assistance.</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="Exit">Exit</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--##### TestConnection State WiFi-->
+      <gc:State Key="TestConnectionWiFi">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewWIFILEDToPcYes"/>
+        <gc:DiagramReplace ReplaceWith="IntroDiagram"/>
+        <gc:Question>Your modem has successfully passed the diagnostic tests.</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="ExecuteCommand" Command="TestConnection">Test Connection</gc:Answer>
+          <gc:Answer Action="Exit">Exit</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+      <!--##### TestConnection State -->
+      <gc:State Key="TestConnection">
+        <gc:DiagramReplace ReplaceWith="ModemOverviewWIFILEDToPcYes"/>
+        <gc:DiagramReplace ReplaceWith="IntroDiagram"/>
+        <gc:Question>Your modem has successfully passed the diagnostic tests.</gc:Question>
+        <gc:Answers>
+          <gc:Answer Action="ExecuteCommand" Command="TestConnection">Test Connection</gc:Answer>
+          <gc:Answer Action="Exit">Exit</gc:Answer>
+        </gc:Answers>
+      </gc:State>
+    </gc:States>
+  </gc:DecisionTree>
+  <gc:Diagrams>
+    <!--######################################################################################################################## PRIMARY DIAGRAMS -->
+    <!-- ################################################## INTRODUCTION DIAGRAMS-->
+    <gc:Diagram Key="IntroDiagram" Location="Primary">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemFrontView"/>
+      </gc:Background>
+      <gc:Overlays/>
+    </gc:Diagram>
+    <gc:Diagram Key="ModemPowerConnectionTypeDiagram" Location="Primary">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="PowerSourceType"/>
+      </gc:Background>
+      <gc:Overlays/>
+    </gc:Diagram>
+    <!-- ################################################## POWER LED DIAGRAMS-->
+    <gc:Diagram Key="ModemPowerLEDDiagram" Location="Primary">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemFrontView"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ArrowLeft"/>
+          <gc:PositionReplace ReplaceWith="ModemPowerLEDPosition"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <gc:Diagram Key="ModemPowerSourceToDeviceDiagram" Location="Primary">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemBackView"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ArrowLeft"/>
+          <gc:PositionReplace ReplaceWith="ModemPowerSourceToDevicePosition"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <!-- ################################################## POWER WALL OUTLET DIAGRAMS-->
+    <gc:Diagram Key="ModemPowerSourceDiagram" Location="Primary">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemPowerSource"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ArrowUp"/>
+          <gc:PositionReplace ReplaceWith="ModemPowerSourcePosition"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <!-- ################################################## POWER STRIP DIAGRAMS-->
+    <gc:Diagram Key="ModemPowerStripDiagram" Location="Primary">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="PowerSurgeStrip"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ArrowRight"/>
+          <gc:PositionReplace ReplaceWith="ModemPowerStripPosition"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <!--  ################################################## WAN LED DIAGRAMS-->
+    <gc:Diagram Key="WANLEDDiagram" Location="Primary">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemFrontView"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ArrowRight"/>
+          <gc:PositionReplace ReplaceWith="ModemSendLEDPosition"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <gc:Diagram Key="ModemInternetSourceDiagram" Location="Primary">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="InternetSource"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ArrowUp"/>
+          <gc:PositionReplace ReplaceWith="ModemInternetSourcePosition"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <gc:Diagram Key="ModemInternetSourceDeviceDiagram" Location="Primary">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemBackView"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ArrowLeft"/>
+          <gc:PositionReplace ReplaceWith="ModemInternetSourceDevicePosition"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <!--  ################################################## WIFI LED DIAGRAMS-->
+    <gc:Diagram Key="WIFILEDDiagram" Location="Primary">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemFrontView"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ArrowLeft"/>
+          <gc:PositionReplace ReplaceWith="ModemWirelessLEDPosition"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <!--  ################################################## FAULT DIAGRAMS -->
+    <gc:Diagram Key="FaultyCableOrDeviceDiagram" Location="Primary">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="FaultImage"/>
+      </gc:Background>
+      <gc:Overlays/>
+    </gc:Diagram>
+    <gc:Diagram Key="FaultyCableDeviceOrServiceState" Location="Primary">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="FaultImage"/>
+      </gc:Background>
+      <gc:Overlays/>
+    </gc:Diagram>
+    <!--######################################################################################################################## OVER VIEW DIAGRAMS -->
+    <!--  ################################################## INTRO DIAGRAM-->
+    <gc:Diagram Key="ModemOverviewIntro" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverview"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <!--  ################################################## POWER DIAGRAMS -->
+    <gc:Diagram Key="ModemOverviewPowerLEDOff" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverview"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewCritical"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <gc:Diagram Key="ModemOverviewPowerLEDOn" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverview"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <gc:Diagram Key="ModemOverviewPowerNotConnected" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverview"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewCritical"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <gc:Diagram Key="ModemOverviewPowerConnected" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverview"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <!--  ################################################## WAN LED DIAGRAMS -->
+    <gc:Diagram Key="ModemOverviewWANLEDOn" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverview"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <gc:Diagram Key="ModemOverviewWANLEDOff" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverview"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewCritical"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <gc:Diagram Key="ModemOverviewWANLEDConnected" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverview"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <gc:Diagram Key="ModemOverviewWANLEDNotConnected" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverview"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewCritical"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <!--  ################################################## WIFI LED DIAGRAMS -->
+    <gc:Diagram Key="ModemOverviewWIFILEDToDeviceUknown" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverviewWireless"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewWiFiToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewWiFiToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <gc:Diagram Key="ModemOverviewWIFILEDToDeviceYes" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverviewWireless"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewWiFiToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewWiFiToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <gc:Diagram Key="ModemOverviewWIFILEDToDeviceNo" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverviewWireless"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewCritical"/>
+          <gc:PositionReplace ReplaceWith="OverviewWiFiToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewWiFiToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <gc:Diagram Key="ModemOverviewWIFILEDToPcYes" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverviewWireless"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewWiFiToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewSafe"/>
+          <gc:PositionReplace ReplaceWith="OverviewWiFiToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <!--  ################################################## FAULT DIAGRAMS -->
+    <gc:Diagram Key="ModemOverviewIntro" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverview"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <!--  ############################################################################################### FAULT OVERVIEW DIAGRAMS -->
+    <!--  ################################################## FAULTY POWER DIAGRAMS -->
+    <gc:Diagram Key="ModemOverviewFaultyPOWER" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverview"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewCritical"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewCritical"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <!--  ################################################## FAULTY WAN DIAGRAMS -->
+    <gc:Diagram Key="ModemOverviewFaultyWAN" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverview"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewCritical"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewCritical"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewCableToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+    <!--  ################################################## FAULTY WIFI DIAGRAMS -->
+    <gc:Diagram Key="ModemOverviewFaultyWiFi" Location="Overview">
+      <gc:Background>
+        <gc:ImageReplace ReplaceWith="ModemOverviewWireless"/>
+      </gc:Background>
+      <gc:Overlays>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="ModemThumbnail"/>
+          <gc:PositionReplace ReplaceWith="OverviewModemThumbnail"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewPowerSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewUnknown"/>
+          <gc:PositionReplace ReplaceWith="OverviewInternetSourceToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewCritical"/>
+          <gc:PositionReplace ReplaceWith="OverviewWiFiToModemStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewCritical"/>
+          <gc:PositionReplace ReplaceWith="OverviewWiFiToPCStatus"/>
+        </gc:Overlay>
+        <gc:Overlay>
+          <gc:ImageReplace ReplaceWith="OverviewDeviceLabel"/>
+          <gc:PositionReplace ReplaceWith="OverviewDeviceLabel"/>
+        </gc:Overlay>
+      </gc:Overlays>
+    </gc:Diagram>
+  </gc:Diagrams>
+  <gc:Positions>
+    <!--######################################################################################################################## Positions -->
+    <gc:Position Key="ModemPowerLEDPosition" X="253" Y="38"/>
+    <gc:Position Key="ModemPowerSourcePosition" X="234" Y="264"/>
+    <gc:Position Key="ModemPowerSourceToDevicePosition" X="319" Y="317"/>
+    <gc:Position Key="ModemPowerStripPosition" X="90" Y="35"/>
+    <gc:Position Key="ModemReceiveLEDPosition" X="253" Y="62"/>
+    <gc:Position Key="ModemSendLEDPosition" X="112" Y="88"/>
+    <gc:Position Key="ModemOnlineLEDPosition" X="178" Y="181"/>
+    <gc:Position Key="ModemInternetSourcePosition" X="233" Y="237"/>
+    <gc:Position Key="ModemInternetSourceDevicePosition" X="319" Y="265"/>
+    <gc:Position Key="ModemETHERNETLEDPosition" X="404" Y="25"/>
+    <gc:Position Key="ModemWirelessPosition" X="373" Y="-10"/>
+    <gc:Position Key="WirelessWavesPosition" X="480" Y="-10"/>
+    <gc:Position Key="ModemWirelessLEDPosition" X="253" Y="157"/>
+    <gc:Position Key="ModemEthernetPortPosition" X="153" Y="53"/>
+    <gc:Position Key="ModemEthernetCableToDevicePosition" X="153" Y="53"/>
+    <gc:Position Key="ModemEthernetCableToPCPosition" X="233" Y="266"/>
+    <gc:Position Key="OverviewModemThumbnail" X="457" Y="-12"/>
+    <gc:Position Key="OverviewPowerSourceStatus" X="264" Y="46"/>
+    <gc:Position Key="OverviewPowerSourceToModemStatus" X="420" Y="15"/>
+    <gc:Position Key="OverviewInternetSourceStatus" X="173" Y="103"/>
+    <gc:Position Key="OverviewInternetSourceToModemStatus" X="420" Y="54"/>
+    <gc:Position Key="OverviewCableToPCStatus" X="805" Y="54"/>
+    <gc:Position Key="OverviewWiFiToPCStatus" X="775" Y="54"/>
+    <gc:Position Key="OverviewCableToModemStatus" X="562" Y="54"/>
+    <gc:Position Key="OverviewWiFiToModemStatus" X="589" Y="54"/>
+    <gc:Position Key="OverviewEthernetCable" X="652" Y="59"/>
+    <gc:Position Key="OverviewDeviceLabel" X="473" Y="113"/>
+  </gc:Positions>
+  <gc:Resources>
+    <!--######################################################################################################################## Resources -->
+    <gc:Images>
+      <gc:Image Key="ModemThumbnail" Source="Images/ModemThumbnail.png"/>
+      <gc:Image Key="ModemFrontView" Source="Images/ModemFrontView.png"/>
+      <gc:Image Key="ModemBackView" Source="Images/ModemBackView.png"/>
+      <gc:Image Key="ModemBackViewEthernetLED" Source="Images/ModemBackViewEthernetLED.png"/>
+      <gc:Image Key="ModemOverview" Source="../CommonResources/OverviewModemCableVertical.jpg"/>
+      <gc:Image Key="ModemOverviewWireless" Source="../CommonResources/OverviewModemCableWirelessVertical.jpg"/>
+      <gc:Image Key="WirelessWaves" Source="../CommonResources/WirelessWaves.png"/>
+      <gc:Image Key="ModemPowerSource" Source="../CommonResources/WallSourcePower.png"/>
+      <gc:Image Key="PowerSurgeStrip" Source="../CommonResources/PowerSurgeStrip.png"/>
+      <gc:Image Key="PowerSourceType" Source="../CommonResources/PowerSourceType.png"/>
+      <gc:Image Key="InternetSource" Source="../CommonResources/WallSourceInternetCable.png"/>
+      <gc:Image Key="PCView" Source="../CommonResources/PortPCEthernet.png"/>
+      <gc:Image Key="ArrowUp" Source="../CommonResources/ArrowUp.png"/>
+      <gc:Image Key="ArrowDown" Source="../CommonResources/ArrowDown.png"/>
+      <gc:Image Key="ArrowLeft" Source="../CommonResources/ArrowLeft.png"/>
+      <gc:Image Key="ArrowRight" Source="../CommonResources/ArrowRight.png"/>
+      <gc:Image Key="FaultImage" Source="../CommonResources/FaultView.png"/>
+      <gc:Image Key="FaultImageFull" Source="../CommonResources/FaultViewFull.png"/>
+      <gc:Image Key="EthernetCable" Source="../CommonResources/PortStatusEthernet.png"/>
+      <gc:Image Key="OverviewCritical" Source="../CommonResources/StatusCritical.png"/>
+      <gc:Image Key="OverviewSafe" Source="../CommonResources/StatusSafe.png"/>
+      <gc:Image Key="OverviewUnknown" Source="../CommonResources/StatusUnknown.png"/>
+      <gc:Image Key="OverviewDeviceLabel" Source="../CommonResources/LabelCableModem.png"/>
+    </gc:Images>
+  </gc:Resources>
+</gc:GuidedContentUnit>

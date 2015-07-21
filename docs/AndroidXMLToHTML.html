@@ -1,0 +1,935 @@
+<html>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <head>
+    
+         <script src="./jquery.min.js"></script>
+        <script type="text/javascript" src="./jquery.scrollto.js"></script>
+        <script type="text/javascript" language="JavaScript">
+         
+         
+           $(document).ready(function(){
+            
+           window.MyHandler.setResult();
+           
+            });
+            
+           function parseParagraphs(xml) {
+                                
+                var paragraphs = [];
+                $(xml).children('paragraph').each(function() {
+                                                  paragraphs.push($(this).text());
+                                                  });
+                return paragraphs;
+            }
+           
+                
+           function al(bb)
+           {
+            	displayArticle(bb);
+           }
+            
+            
+            window.scrollToStep = function scrollToStep(stepNum) {
+              if (stepNum == 0) {
+                $('#intro').ScrollTo()
+              } else {
+                $('#solution .step#' + stepNum).ScrollTo();
+              }
+            }
+            
+            function hideSpinner() {
+                         }
+            function cleanArticle(){
+                $('#title').html('');
+                $('#intro').html('');
+                $('#solution').html('');
+                $('#completion').html('');
+                $('#see_also').html('');
+            }
+            
+            function resetArticle() {
+                cleanArticle();
+                var target = document.getElementById('container');
+                $("html, body").animate({ scrollTop: 0 }, "medium");
+            }
+            
+            function parseArticle(articleXMLString) {
+                var article = {};
+                var $article = $(articleXMLString);
+                
+                article['title'] = $($article.children('title')[0]).text();
+                article['subtitle'] = $($article.children('subtitle')[0]).text();
+                
+                $intro = $($article.children('intro')[0]);
+                $introChildren = $intro.children();
+                article.intro = []
+                $.each($introChildren, function(count, child) {
+		           $child = $(child);
+		           
+		           if ($child.is('paragraph')) {
+		           	   paragraph = {}
+		           	   paragraph['type'] = 'paragraph';
+		           	   paragraph['text'] = $child.text();
+		               article.intro.push(paragraph);
+		           }
+		           
+		           if ($child.is('bullet')) {
+		               bullet = {}
+		               bullet['type'] = 'bullet';
+		               bullet['text'] = $child.text();
+		               article.intro.push(bullet);
+		           }
+		       });
+                
+                $solution = $($article.children('solution')[0]);
+                
+                $solutionChildren   = $solution.children();
+                article.solution = []
+                $.each($solutionChildren, function(count, child) {
+		           $child = $(child);
+		           
+		           if ($child.is('paragraph')) {
+		           	   paragraph = {}
+		           	   paragraph['type'] = 'paragraph';
+		           	   paragraph['text'] = $child.text();
+		               article.solution.push(paragraph);
+		           }
+		           
+		           if ($child.is('link') || $child.is('articlelink') || $child.is('download')) {
+		               link = {}
+		               link['type'] = 'link';
+		               link['uri'] = $child.attr('uri');
+		               var text = $child.text();
+		               if (text.length == 0) {
+		                   try
+		                   {
+		                       if (null != $child.context.nextSibling) {
+		               	           if (null != $child.context.nextSibling.data) {
+		                               text = $child.context.nextSibling.data;
+		                           }
+		                       }
+		                   }
+		                   catch(e)
+		                   {
+		               	
+		                   }
+		               }
+		               link['text'] = text;
+		               article.solution.push(link);
+		           }
+		           
+		           if ($child.is('externalimage')) {
+		               externalimage = {}
+		               externalimage['type'] = 'externalimage';
+		               externalimage['uri'] = $child.attr('uri');
+		               var text = $child.text();
+		               if (text.length == 0) {
+		                   try
+		                   {
+		                       if (null != $child.context.nextSibling) {
+		               	           if (null != $child.context.nextSibling.data) {
+		                               text = $child.context.nextSibling.data;
+		                           }
+		                       }
+		                   }
+		                   catch(e)
+		                   {
+		               	
+		                   }
+		               }
+		               if (!(typeof text === 'undefined') && text.length != 0){
+		                   externalimage['text'] = text;
+		               }
+		               article.solution.push(externalimage);
+		           }
+		           
+		           if ($child.is('externalvideo')) {
+		               externalvideo = {}
+		               externalvideo['type'] = 'externalvideo';
+		               
+		               var olduri = $child.attr('uri');
+		               var uri;
+		               if (-1 != olduri.search("youtube")) {
+		                   uri = olduri.replace("watch?v=", "embed/");
+		               }
+		               else if (-1 != olduri.search("//vimeo")) {
+		                   uri = olduri.replace("vimeo.com", "player.vimeo.com/video");
+		               }
+		               else {
+		                   uri = olduri;
+		               }
+		               externalvideo['uri'] = uri;
+		               var text = $child.text();
+		               if (text.length == 0) {
+		                   try
+		                   {
+		                       if (null != $child.context.nextSibling) {
+		               	           if (null != $child.context.nextSibling.data) {
+		                               text = $child.context.nextSibling.data;
+		                           }
+		                       }
+		                   }
+		                   catch(e)
+		                   {
+		               	
+		                   }
+		               }
+		               if (!(typeof text === 'undefined') && text.length != 0){
+		                   externalvideo['text'] = text;
+		               }
+		               article.solution.push(externalvideo);
+		           }
+		           
+		           if ($child.is('video')) {
+		               video = {}
+		               video['type'] = 'video';
+		               video['uri'] = "http://www.socsuite.com/Media" + $child.attr('uri');
+		               var text = $child.text();
+		               if (text.length == 0) {
+		                   try
+		                   {
+		                       if (null != $child.context.nextSibling) {
+		               	           if (null != $child.context.nextSibling.data) {
+		                               text = $child.context.nextSibling.data;
+		                           }
+		                       }
+		                   }
+		                   catch(e)
+		                   {
+		               	
+		                   }
+		               }
+		               if (!(typeof text === 'undefined') && text.length != 0){
+		                   video['text'] = text;
+		               }
+		               article.solution.push(video);
+		           }
+		           
+		           if ($child.is('step')) {
+		               step = []
+		               step['type'] = 'step';
+		               $stepchildren = $child.children();
+		               $.each($stepchildren, function(count, child) {
+		                   $subchild = $(child);
+		                   
+		                   if ($subchild.is('paragraph')) {
+		           	           paragraph = {}
+		           	           paragraph['type'] = 'paragraph';
+		           	           paragraph['text'] = $subchild.text();
+		                       step.push(paragraph);
+		                   }
+		                   
+		                   if ($subchild.is('stepsubtext')) {
+		                       subtext = {}
+		                       subtext['type'] = 'subtext';
+		                       subtext['text'] = $subchild.text();
+		                       step.push(subtext);
+		                   }
+		               });
+		               article.solution.push(step);
+		           }
+		           
+		           if ($child.is('image') || $child.is('img')) {
+		               image = {}
+		               image['type'] = 'image';
+		               image['uri'] = "http://www.socsuite.com/Media" + $child.attr('uri');
+		               var text = $child.text();
+		               if (text.length == 0) {
+		                   try
+		                   {
+		                       if (null != $child.context.nextSibling) {
+		               	           if (null != $child.context.nextSibling.data) {
+		                               text = $child.context.nextSibling.data;
+		                           }
+		                       }
+		                   }
+		                   catch(e)
+		                   {
+		               	
+		                   }
+		               }
+		               if (!(typeof text === 'undefined') && text.length != 0){
+		                   image['text'] = text;
+		               }
+		               article.solution.push(image);
+		           }
+		           
+		           if ($child.is('bullet')) {
+		               bullet = {}
+		               bullet['type'] = 'bullet';
+		               bullet['text'] = $child.text();
+		               article.solution.push(bullet);
+		           }
+		           
+		           if ($child.is('warning')) {
+		               warning = {}
+		               warning['type'] = 'warning';
+		               warning['text'] = $child.text();
+		               article.solution.push(warning);
+		           }
+		           
+		           if ($child.is('warningblock')) {
+		             
+		               warningblock = []
+		               warningblock['type'] = 'warningblock';
+		               $warningblockchildren = $child.children();
+		               
+                       $.each($warningblockchildren, function(count, child) {
+		                   $subchild = $(child);
+		                   
+		                   if ($subchild.is('paragraph')) {
+		           	           paragraph = {}
+		           	           paragraph['type'] = 'paragraph';
+		           	           paragraph['text'] = $subchild.text();
+		                       warningblock.push(paragraph);
+		                   }
+		                   
+		                   if ($subchild.is('bullet')) {
+		                       bullet = {}
+		                       bullet['type'] = 'bullet';
+		                       bullet['text'] = $subchild.text();
+		                       warningblock.push(bullet);
+		                   }
+		                   
+		                   if ($subchild.is('bulletlink')) {
+		                       bulletlink = {}
+		                       bulletlink['type'] = 'bulletlink';
+		                       bulletlink['text'] = $subchild.text();
+		                       if ($subchild.length > 0) {
+		                           bulletlink['bulletlinkuri'] = $subchild.attr('uri');
+			                       var text = $subchild.text();
+			                       if (text.length == 0) {
+			                           try
+			                           {
+			                               if (null != $subchild.context.nextSibling) {
+			               	                   if (null != $subchild.context.nextSibling.data) {
+			                                       text = $subchild.context.nextSibling.data;
+			                                   }
+			                               }
+			                           }
+			                           catch(e)
+			                           {
+			               	
+			                           }
+			                       }
+			                       if (!(typeof text === 'undefined') && text.length != 0){
+		                               bulletlink['bulletlinktext'] = text;
+		                           }            
+		                       }
+		                       warningblock.push(bulletlink);
+		                   }
+		                   
+		                   if ($subchild.is('articlelink')) {
+		                       articlelink = {}
+		                       articlelink['type'] = 'articlelink';
+		                       articlelink['text'] = $subchild.text();
+		                       if ($subchild.length > 0) {
+		                           articlelink['articlelinkuri'] = $subchild.attr('uri');
+			                       var text = $subchild.text();
+			                       if (text.length == 0) {
+			                           try
+			                           {
+			                               if (null != $subchild.context.nextSibling) {
+			               	                   if (null != $subchild.context.nextSibling.data) {
+			                                       text = $subchild.context.nextSibling.data;
+			                                   }
+			                               }
+			                           }
+			                           catch(e)
+			                           {
+			               	
+			                           }
+			                       }
+			                       if (!(typeof text === 'undefined') && text.length != 0){
+		                               articlelink['articlelinktext'] = text;
+		                           }            
+		                       }
+		                       warningblock.push(articlelink);
+		                   }
+		                   
+		               });
+		               
+		               article.solution.push(warningblock);
+		           }
+		           
+		           if ($child.is('bulletlink')) {
+		               bulletlink = {}
+		               bulletlink['type'] = 'bulletlink';
+		               bulletlink['uri'] = $child.attr('uri');
+		               var text = $child.text();
+		               if (text.length == 0) {
+		                   try
+		                   {
+		                       if (null != $child.context.nextSibling) {
+		               	           if (null != $child.context.nextSibling.data) {
+		                               text = $child.context.nextSibling.data;
+		                           }
+		                       }
+		                   }
+		                   catch(e)
+		                   {
+		               	
+		                   }
+		               }
+		               if (!(typeof text === 'undefined') && text.length != 0){
+		                   bulletlink['text'] = text;
+		               }
+		               article.solution.push(bulletlink);
+		           }
+                });
+                
+                $completion = $($article.children('completion')[0]);
+                $completionChildren = $completion.children();
+                article.completion = []
+                $.each($completionChildren, function(count, child) {
+		           $child = $(child);
+		           
+		           if ($child.is('paragraph')) {
+		           	   paragraph = {}
+		           	   paragraph['type'] = 'paragraph';
+		           	   paragraph['text'] = $child.text();
+		               article.completion.push(paragraph);
+		           }
+		           
+		           if ($child.is('bullet')) {
+                       bullet = {}
+                       bullet['type'] = 'bullet';
+                       bullet['text'] = $child.text();
+                       article.completion.push(bullet);
+                   }
+                   
+                   if ($child.is('bulletlink')) {
+                       bulletlink = {}
+                       bulletlink['type'] = 'bulletlink';
+                       bulletlink['text'] = $child.text();
+                       if ($child.length > 0) {
+                           bulletlink['bulletlinkuri'] = $child.attr('uri');
+	                       var text = $child.text();
+	                       if (text.length == 0) {
+	                           try
+	                           {
+	                               if (null != $child.context.nextSibling) {
+	               	                   if (null != $child.context.nextSibling.data) {
+	                                       text = $child.context.nextSibling.data;
+	                                   }
+	                               }
+	                           }
+	                           catch(e)
+	                           {
+	               	
+	                           }
+	                       }
+	                       if (!(typeof text === 'undefined') && text.length != 0){
+                               bulletlink['bulletlinktext'] = text;
+                           }            
+                       }
+                       article.completion.push(bulletlink);
+                   }
+		        });
+                
+                $seeAlso = $($article.children('seealso')[0]);
+                $seeAlsoChildren = $seeAlso.children();
+                article.seeAlso = []
+                $.each($seeAlsoChildren, function(count, child) {
+		            $child = $(child);
+		           
+		            if ($child.is('paragraph')) {
+		           	    paragraph = {}
+		           	    paragraph['type'] = 'paragraph';
+		           	    paragraph['text'] = $child.text();
+		                article.seeAlso.push(paragraph);
+		            }
+		           
+		            if ($child.is('articlelink')) {
+		                articlelink = {}
+		                articlelink['type'] = 'articlelink';
+		                articlelink['uri'] = $child.attr("uri");
+		                articlelink['text'] = $child.text();
+		                article.seeAlso.push(articlelink);
+		            }
+		        });
+               
+                return article;
+            }
+            
+            function insertParagraphs($node, array) {
+                var textToInsert= '';
+                $.each(array, function(count, text) {
+                       textToInsert += '<p>' + text + '</p>';
+                       });
+                $node.append(textToInsert);
+            };
+            
+            window.displayArticle = function displayArticle(articleXMLString) {
+
+	            resetArticle();
+	            article = parseArticle($(articleXMLString));
+	            if (!article) return;
+	            
+	            $('#title').html(article.title);
+	            $('#subtitle').html(article.subtitle);
+	            
+	            if (article.intro) {
+                	$('#introtitle').html('Introduction');
+                	
+                	$introduction = $('#intro');
+	                $.each(article.intro, function(count, part) {
+	                    if (part.type == 'paragraph') {
+	                        $introText = $('<div></div>').addClass('text');
+	                        $introText.append('<p>' + part.text + '</p>');
+	                        $introduction.append($introText);
+	                    }
+	                    
+	                    if (part.type == 'bullet') {
+			               $bullet = $('<div></div>').addClass('bullet');
+			               $bullet.append('<ul><li>' + part.text + '</li></ul>');
+			               $introduction.append($bullet);
+		               }
+	                });
+                }
+                
+                
+	            
+	            if (article.solution) {
+                	$('#solutiontitle').html('Solution');
+                }
+	            
+	            $solution = $('#solution');
+	        
+	            stepNum = 1;
+	            $.each(article.solution, function(count, part) {
+	               if (part.type == 'paragraph') {
+                       $paragraph = $('<div></div>').addClass('text');
+                       $paragraph.append('<p>' + part.text + '</p>');
+                       $solution.append($paragraph);
+                   }
+	                    
+	               if (part.type == 'link') {
+		               $wrapper = $('<div></div>').addClass('link');
+		               $listitem = $('<li></li>');
+		               $link = $('<a></a>').attr("href",part.uri).html(part.text);
+		               $listitem.append($link);
+		               $wrapper.append($listitem);
+		               $solution.append($wrapper);
+	               }
+	               
+	               if (part.type == 'step') {
+		               $step = $('<div></div>').addClass('step').attr("id", stepNum.toString());
+		               $number = $('<div></div>').addClass('number').html(stepNum.toString() + ' ');
+		               $step.append($number);
+		               $.each(part, function(count, subpart) {
+		               
+		                   if (subpart.type == 'paragraph') {
+	                           $paragraph = $('<div></div>').addClass('text');
+	                           $paragraph.append('<p>' + subpart.text + '</p>');
+			                   $step.append($paragraph);
+	                       }
+	                       
+	                       if (subpart.type == 'subtext') {
+	                           $subtext = $('<div></div>').addClass('subtext');
+			                   $subtext.append('<p>' + subpart.text + '</p>');
+			                   $step.append($subtext);
+	                       }
+	                   });
+		               $solution.append($step);
+		               stepNum +=1;
+	               }
+	              
+	               if (part.type == 'image') {
+		               $wrapper = $('<div></div>');
+		               $imgtext = $('<p></p>').addClass('imagetext');
+		               $img = $('<img></img>').attr("src", part.uri).addClass('image');
+		               $imgtext.append($img);
+                       if (part.text) {
+		                   $imgtext.append('<p>' + part.text + '</p>');
+		               }
+		               $wrapper.append($imgtext);
+		               $solution.append($wrapper);
+	               }
+	               
+	               if (part.type == 'externalimage') {
+		               $wrapper = $('<div></div>');
+		               $imgtext = $('<p></p>').addClass('imagetext');
+		               $img = $('<img></img>').attr("src", part.uri).addClass('image');
+		               $imgtext.append($img);
+                       if (part.text) {
+		                   $imgtext.append('<p>' + part.text + '</p>');
+		               }
+		               $wrapper.append($imgtext);
+		               $solution.append($wrapper);
+	               }
+	               
+	               if (part.type == 'externalvideo') {
+		               $wrapper = $('<div></div>');
+		               $vidtext = $('<p></p>').addClass('imagetext');
+		               $vid = $('<iframe></iframe>').attr({src: part.uri, controls:"true", webkitallowfullscreen:"true", mozallowfullscreen:"true", allowfullscreen:"true"}).addClass('video');
+		               $vid.append("Your browser does not support HTML5 video.");
+                       if (part.text) {
+		                   $vidtext.append(part.text);
+		               }
+		               $wrapper.append($vid);
+		               $wrapper.append($vidtext);
+		               $solution.append($wrapper);
+	               }
+	               
+	               if (part.type == 'video') {
+		               $wrapper = $('<div></div>');
+		               $vidtext = $('<p></p>').addClass('imagetext');
+		               $vid = $('<video></video>').attr({src: part.uri, controls:"true"}).addClass('video');
+		               $vidsource = $('<source></source>').attr({src: "part.uri", type:"video/mp4"});
+		               $vid.append("Your browser does not support HTML5 video.");
+		               $vidtext.append($vid);
+                       if (part.text) {
+		                   $vidtext.append(part.text);
+		               }
+		               $wrapper.append($vid);
+		               $wrapper.append($vidtext);
+		               $solution.append($wrapper);
+	               }
+	               
+	               if (part.type == 'bullet') {
+		               $bullet = $('<div></div>').addClass('bullet');
+		               $bullet.append('<ul><li>' + part.text + '</li></ul>');
+		               $solution.append($bullet);
+	               }
+	               
+	               if (part.type == 'warning') {
+		               $warning = $('<div></div>').addClass('warningblock');
+		               $warningblockText = $('<div></div>').addClass('text').html('<p>' + part.text + '</p>');
+		               $symbol = $('<div></div>').addClass('symbol').text('!');
+		               $warning.append($symbol).append($warningblockText);
+		               $solution.append($warning);
+	               }
+	               
+	               if (part.type == 'warningblock') {
+		               $warningblock = $('<div></div>').addClass('warningblock');
+		               $symbol = $('<div></div>').addClass('symbol').text('!');
+		               $warningblock.append($symbol);
+		               
+		               $.each(part, function(count, subpart) {
+		               
+		                   if (subpart.type == 'paragraph') {
+	                           $paragraph = $('<div></div>').addClass('text');
+	                           $paragraph.append('<p>' + subpart.text + '</p>');
+			                   $warningblock.append($paragraph);
+	                       }
+	                       
+	                       if (subpart.type == 'bullet') {
+	                           $bullet = $('<div></div>').addClass('bullet');
+			                   $bullet.append('<ul><li>' + subpart.text + '</li></ul>');
+			                   $warningblock.append($bullet);
+	                       }
+	                       
+	                       if (subpart.type == 'bulletlink') {
+	                           $wrapper = $('<div></div>').addClass('bulletlink');
+		                       $listouter = $('<ul></ul>');
+		                       $listitem = $('<li></li>');
+		                       $link = $('<a></a>').attr("href",subpart.bulletlinkuri).html(subpart.bulletlinktext);
+		                       $listitem.append($link);
+		                       $listouter.append($listitem);
+		                       $wrapper.append($listouter);
+		                       $warningblock.append($wrapper);
+	                       }
+	                       
+	                       if (subpart.type == 'articlelink') {
+	                           $wrapper = $('<div></div>').addClass('link');
+		                       $listitem = $('<li></li>');
+		                       $link = $('<a></a>').attr("href",subpart.articlelinkuri).html(subpart.articlelinktext);
+		                       $listitem.append($link);
+		                       $wrapper.append($listitem);
+		                       $warningblock.append($wrapper);
+	                       }
+                       });
+                       $warningblock.append('<p></p>');
+		               $solution.append($warningblock);
+	               }
+	               
+	               if (part.type == 'bulletlink') {
+		               $wrapper = $('<div></div>').addClass('bullet');
+		               $listouter = $('<ul></ul>');
+		               $listitem = $('<li></li>');
+		               $link = $('<a></a>').attr("href",part.uri).html(part.text);
+		               $listitem.append($link);
+		               $listouter.append($listitem);
+		               $wrapper.append($listouter);
+		               $solution.append($wrapper);
+	               }
+	               
+	               });
+                
+                if (article.completion) {
+                	$('#completiontitle').html('Completion');
+                    
+                    $.each(article.completion, function(count, part) {
+		               
+	                   if (part.type == 'paragraph') {
+                           $paragraph = $('<div></div>').addClass('text');
+                           $paragraph.append('<p>' + part.text + '</p>');
+		                   $('#completion').append($paragraph);
+                       }
+                       
+                       if (part.type == 'bullet') {
+                           $bullet = $('<div></div>').addClass('bullet');
+		                   $bullet.append('<ul><li>' + part.text + '</li></ul>');
+		                   $('#completion').append($bullet);
+                       }
+                       
+                       if (part.type == 'bulletlink') {
+                           $wrapper = $('<div></div>').addClass('bulletlink');
+	                       $listouter = $('<ul></ul>');
+	                       $listitem = $('<li></li>');
+	                       $link = $('<a></a>').attr("href",part.bulletlinkuri).html(part.bulletlinktext);
+	                       $listitem.append($link);
+	                       $listouter.append($listitem);
+	                       $wrapper.append($listouter);
+	                       $('#completion').append($wrapper);
+                       }
+                   });
+                }
+               
+                if (article.seeAlso && article.seeAlso.length) {
+                	$('#seealsotitle').html('See Also');
+                    $.each(article.seeAlso, function(count, part) {
+                    
+                       if (part.type == 'paragraph') {
+	                        $seealsoText = $('<div></div>').addClass('text');
+	                        $seealsoText.append('<p>' + part.text + '</p>');
+	                        $('#see_also').append($seealsoText);
+	                    }
+	                    
+	                    if (part.type == 'articlelink') {
+			               $wrapper = $('<li></li>');
+                           $link = $('<a></a>').attr("href",part.uri).html(part.text);
+                           $wrapper.append($link);
+                           $('#see_also').append($wrapper);
+		               }
+                   });
+                };
+                hideSpinner();
+            }
+            
+            </script>
+        
+        <style>
+            body { 
+                font-family: 'Helvetica', 'Lucida Grande', Arial;
+                background-color: #FCFDFD;
+                font-size: 14px;
+            }
+
+            header {
+              text-align: right;
+            }
+
+            h1 {
+              font-family: "HelveticaNeue-Medium", "Lucida Grande", "Georgia";
+              font-size: 24px;
+            }
+
+            a:link {color:blue;}
+            
+            h2 {
+              font-size: 18px;
+            }
+
+            h3 {
+              font-family: 'Helvetica-LightOblique';
+              font-style: italic;
+              font-size: 14px;
+            }
+
+            #subtitle {
+                color: gray;
+            }
+
+
+            section {clear: both; margin-top: 30px;}
+
+            #container {
+              margin: auto 0px;
+            }            
+            #solution {
+              text-align: center;
+            }
+            
+            
+            .step {
+                -webkit-border-radius: 8px;
+                -moz-border-radius: 8px;
+                border-radius: 8px;
+                padding: 4px;
+                border: 2px solid gray;
+                background-color: #ffffff;
+                width: 95%;
+                margin: 0px;
+                margin: 20px 0px 20px 5px;
+                text-align: left;
+            }
+            
+            .step .number {
+                border-radius:999px;
+                background:gray;
+                color:#fff;
+                border:2px lightgray solid;
+                background-color: #363035;
+                display:inline-block;
+                padding:2px 2px 2px 2px ;
+                text-align:center;
+                line-height: 25px;
+                margin:3px;
+                width: 25px;
+                height: 25px;
+                font-family:arial;
+                font-weight:bold;
+                float: left;
+            }
+            
+            .step .text {
+                margin-left: 50px;
+            }
+            
+            .step .subtext {
+                margin-left: 50px;
+                color: gray;
+            }
+            
+            #solution img {
+                max-width: 100%;
+            }
+            
+            
+            #see_also {
+                list-style-type: none;
+                padding: 0px;
+                margin: 0px;
+            }
+            
+            #see_also li{
+                background-image: url(key.png);
+                background-repeat:no-repeat;
+                background-size: 15px 15px;
+                background-repeat: no-repeat;
+                background-position: 0 2;
+                padding-left: 20px;
+                min-height: 30px;
+            }
+            
+            .text {
+            	text-align: left;
+                margin-left: 20px;
+            }
+            
+            .image {
+                max-width: 100%;
+            }
+            
+            .imagetext {
+                text-align: center;
+            }
+            
+            .link {
+                list-style-type: none;
+                text-align: left;
+                margin-left: 20px;
+            }
+            
+            .bullet {
+            	text-align: left;
+                margin-left: 20px;
+            }
+            
+            .warningblock {
+                -webkit-border-radius: 8px;
+                -moz-border-radius: 8px;
+                border-radius: 8px;
+                padding: 4px;
+                border: 2px solid red;
+                background-color: #ffffff;
+                width: 95%;
+                margin: 0px;
+                margin: 20px 0px 20px 5px;
+                text-align: left;
+            }
+            
+            .warningblock .text {
+                margin-left: 50px;
+                color: red;
+            }
+            
+            .warningblock .symbol {
+                border-radius:999px;
+                background:gray;
+                color:#fff;
+                border:2px lightgray solid;
+                background-color:red;
+                display:inline-block;
+                padding:2px 2px 2px 2px ;
+                text-align:center;
+                line-height: 25px;
+                margin:3px;
+                width: 25px;
+                height: 25px;
+                font-family:arial;
+                font-weight:bold;
+                float: left;
+            }
+            
+            .warningblock .text .subtext {
+                color: red;
+                font-style: italic;
+            }
+            
+            .warningblock .bulletlink {
+            	color: red;
+            }
+            
+            .warningblock .link {
+                list-style-type: none;
+                text-align: left;
+                margin-left: 50px;
+            }
+            
+            .bulletlink {
+            	text-align: left;
+                margin-left: 20px;
+            }
+            
+            .video {
+            	width: 320px;
+            	height: 240px
+            }
+            
+            </style>
+    </head>
+    <body>
+        <div id="container">
+            <div id="article">
+                
+                <header>
+                  <h1 id="title"></h1>
+                  <h3 id="subtitle"></h3>
+                </header>
+                <section>
+                    <h2 id="introtitle"></h2>
+                    <div id="intro"></div>
+                </section>
+                
+                <section>
+                    <h2 id="solutiontitle"></h2> 
+                    <div id="solution">
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 id="completiontitle"></h2>
+                    <div id="completion"><div>
+                        </section>
+                
+                <section>
+                    <h2 id="seealsotitle"></h2>
+                    <ul id="see_also"><ul>
+                        </section>
+            </div>
+        </div>
+    </body>
+</html>

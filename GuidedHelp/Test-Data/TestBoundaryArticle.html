@@ -1,0 +1,38 @@
+﻿<html lang="en">
+<head>
+    <script data-main="/GuidedHelp/js/guidedHelp_app.js" src="/lib/ThirdParty/require-2.1.15.js"></script>
+
+    <!-- Test that no title is caught -- title>Test Boundary Article</title !-->
+</head>
+<body ng-controller="GuidedHelpController" data-ng-init="introState='BogusState'; " ng-cloak>
+    <img id="spinner_img" src="../CommonResources/spinner.png" ng-hide="areDiagramsReady()" />
+
+    <div id="States" ng-show="areDiagramsReady()">
+        <div id="IntroductionState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">                     
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed hendrerit mi et aliquam placerat. Nunc ac tellus ac odio egestas tempor. Quisque auctor turpis eleifend sapien commodo semper. Ut sit amet dolor at nisl lobortis dictum. Fusce a fermentum nibh. Vivamus quis sollicitudin velit, a feugiat mi. Morbi non urna at diam hendrerit pharetra non eu diam. Donec nec neque nec dolor tristique aliquam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum at ultrices neque. Cras ultrices sem felis, et rhoncus justo varius non. Nunc suscipit diam sit amet elit convallis auctor nec vel risus. Praesent quam diam, dapibus a tempus ac, pretium nec arcu. Sed fermentum ornare massa, sed semper massa. Proin id velit at metus lobortis euismod.</p>
+
+                        <p>Phasellus eu lacus vulputate, mattis odio non, sollicitudin turpis. In bibendum pretium tempus. Cras tortor felis, gravida a aliquet at, ornare at lorem. Pellentesque in odio ut risus venenatis consectetur. Fusce vel hendrerit nisi, et lacinia dolor. Vestibulum felis dui, pretium eget elit vitae, bibendum eleifend lorem. Sed a est at felis pharetra dictum in et leo. Ut nec auctor velit. Integer lacinia sollicitudin erat. Donec ac libero dui. Sed sodales erat dui, sed ullamcorper ante pretium eget.</p>
+
+                        <p>Pellentesque eu iaculis lectus, a luctus nibh. Nulla malesuada ligula dolor, ac dapibus purus eleifend eget. Pellentesque convallis arcu vel velit interdum iaculis. Curabitur vel aliquet massa, in feugiat sem. Nunc sit amet ex dapibus purus condimentum molestie in non ipsum. Sed vehicula tempor purus, in tincidunt lorem malesuada ac. Pellentesque pellentesque neque et risus pretium, at varius felis tempor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc posuere vitae urna sed elementum. Phasellus nulla dui, fermentum et vulputate eu, maximus a tortor. Ut faucibus egestas consectetur. Cras id finibus eros, non rutrum sem. Quisque ac magna ac massa lacinia eleifend quis iaculis dolor.</p>
+
+                        <p>Proin sagittis, erat vitae pretium tempor, dui turpis varius mi, nec faucibus leo mauris eu turpis. Donec id nibh mollis turpis tincidunt rhoncus ut a velit. Maecenas blandit est ligula, sit amet suscipit nisi luctus vitae. Donec pretium condimentum lobortis. Etiam mollis non ipsum eget bibendum. Mauris ut ex ex. Suspendisse at pretium ipsum, ut condimentum est. Integer rhoncus ligula dui, at consectetur libero elementum sit amet.</p>
+
+                        <p>Morbi mollis felis sed tincidunt suscipit. Duis eget porta dolor. Donec sit amet dui est. Quisque volutpat elit sed arcu ullamcorper tempor. Suspendisse ante sem, eleifend et placerat vitae, tincidunt eget nisl. Nulla nec ante vitae urna condimentum tempor. Suspendisse ut turpis a neque mattis tincidunt sed eget erat.</p>
+                    </div>
+                </div>
+
+                <div diagram-wrap>
+                    <div background-image src="../Test-Data/images/PillarsOfCreation_TooLargeImage.jpg"></div>
+                </div>
+            </div>
+
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('NonExistantState')" class="ButtonStyle">Next</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

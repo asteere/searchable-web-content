@@ -1,0 +1,8 @@
+﻿<div class="CenterWrap" ng-show="showProgressBar()">
+    <div class="ProgressBar" ng-repeat="state in getStates()">
+        <div ng-class="getProgressBarClass($index)"></div>
+    </div>
+</div>
+
+<img class="imgSettings" ng-click="openMorePopup()" src="/lib/MorePopup/image/more-icon.png" width="40px" height="40px" />
+

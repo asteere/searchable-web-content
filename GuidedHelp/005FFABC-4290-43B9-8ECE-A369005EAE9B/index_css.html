@@ -1,0 +1,27 @@
+<html lang="en">
+<script data-main="/GuidedHelp/js/guidedHelp_app.js" src="/lib/ThirdParty/require-2.1.15.js"></script>
+
+    <title>DISH Network Hopper: Troubleshoot Network Connection</title>
+</head>
+<body ng-controller="GuidedHelpController" data-ng-init="introState='IntroductionState'; isArticle=true" ng-cloak>
+    <img id="spinner_img" src="../CommonResources/spinner.png" ng-hide="areDiagramsReady()" />
+
+    <div id="States" ng-show="areDiagramsReady()">
+        <div id="IntroductionState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        If your Hopper receiver is having trouble connecting to the Internet because of connectivity problems on     your home network, a recent power outage, or some other reason, you may need to reset its connection to the Internet. Follow the solution below to learn how.
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/1/1/279015HopperHDMI00Side.jpg"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('WithyourTVandreceiver')" class="ButtonStyle">Next</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

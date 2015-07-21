@@ -1,0 +1,56 @@
+﻿<div>
+    <link rel="stylesheet" type="text/css" ng-href="/lib/QrCode/css/qrCodePopup.css" />
+
+    <div class="popupwrap">
+        <div class="popupBox">
+            <div class="ShadowBox">
+                <div class="ShadowBoxContent">
+                    <div class="popupheader">
+                        <label class="popuplefttext">{{modalOptions.headerText}}</label>
+                    </div>
+                    <div class="popupmain">
+                        <div class="btn-group separator" ng-show="modalOptions.scroll">
+                            <label id="guidedRadioButton" class="btn btn-primary" ng-model="isScrollingCss" ng-change="proxy('toggleScrolling')" btn-radio="'Guided'">Guided (Step-by-step)</label>
+                            <label id="scrollRadioButton" class="btn btn-primary" ng-model="isScrollingCss" ng-change="proxy('toggleScrolling')" btn-radio="'Scroll'">Scroll</label>
+                        </div>
+                        <div class="separator" ng-show="modalOptions.goToStart">
+                            <div class="popuplefttext">Go To Beginning</div>
+                            <button type="button" class="PopupButtonStyle FloatRight" data-ng-click="proxy('goToStart')">Go</button>
+                        </div>
+                        <div class="separator">
+                            <div class="popuplefttext">Run Command</div>
+                            <button type="button" class="PopupButtonStyle FloatRight" data-ng-click="proxy('executeCommand', 'fixits/procexp.exe')">ProcExp</button>
+                        </div>
+                        <div class="separator">
+                            <div class="popuplefttext">View on another device</div>
+                            <button type="button" class="PopupButtonStyle FloatRight" data-ng-click="proxy('popupQrCode')">Go</button>
+                        </div>
+                        <div class="separator">
+                            <div class="popuplefttext">Email Help</div>
+                            <button type="button" class="PopupButtonStyle FloatRight" data-ng-click="proxy('emailHelp')">Go</button>
+                        </div>
+                        <div class="separator">
+                            <div class="popuplefttext">Contact a human</div>
+                            <button type="button" class="PopupButtonStyle FloatRight" data-ng-click="proxy('chatWithAgent')">Go</button>
+                        </div>
+                        <div class="separator" ng-show="modalOptions.networkMap">
+                            <div class="popuplefttext">Network Map</div>
+                            <button type="button" class="PopupButtonStyle FloatRight" data-ng-click="proxy('getNetworkMap')">Download</button>
+                        </div>
+                        <div class="separator">
+                            <div class="popuplefttext">Learn more</div>
+                            <button type="button" class="PopupButtonStyle FloatRight" data-ng-click="proxy('goToWebContentHome')">Go</button>
+                        </div>
+                        <div class="popupcontrols">
+                            <div ng-repeat="button in buttons" style="float: left; margin: 0px 5px;">
+                                <button type="button" class="PopupButtonStyle" data-ng-click="executeButton(button)" custom-autofocus="{{button.focus}}" modal-popup-button>
+                                    <img src="/lib/MorePopup/image/16x16-black-white-android-return.png" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

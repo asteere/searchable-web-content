@@ -1,0 +1,268 @@
+﻿.popupwrap {
+    max-height: 300px;
+    max-width: 300px;
+    z-index: 104;
+    position: fixed;
+    display: table;
+    font-size: 20px;
+    left: 1%;
+    top: 1%;
+}
+
+.popupheader {
+    display: table;
+}
+
+    .popupheader:after {
+        clear: both;
+    }
+
+.popuplefttext {
+    float: left;
+    margin: 6px 0 0 14px;
+    color: #000000;
+}
+
+.popuprighttext {
+    float: right;
+    margin: 6px 14px 0 0;
+}
+
+.popupmain {
+    color: white;
+}
+
+    .popupmain:after {
+        clear: both;
+    }
+
+    .popupmain .popuptext {
+        padding: 2px;
+        margin-left: 0px;
+    }
+
+    .popupmain .popupcontrols {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 380px;
+        margin-bottom: 0px;
+        display: table;
+    }
+
+    .popupmain .separator {
+        border-bottom: 2px solid #ff760e;
+        width: 98%;
+        margin: 5px;
+        overflow: hidden;
+    }
+
+.popupBox {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.ShadowBox {
+    position: relative;
+    z-index: 1;
+    background: rgba(0,0,0,0.1);
+    border-radius: 12px;
+    border: 0px solid transparent;
+    margin: 10px;
+    max-width: 300px;
+    max-height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .ShadowBox:before {
+        position: absolute;
+        z-index: -1;
+        top: 2px;
+        left: 2px;
+        right: 2px;
+        bottom: 2px;
+        border-radius: 20px;
+    }
+
+
+    .ShadowBox:after {
+        position: absolute;
+        z-index: -1;
+        top: 4px;
+        left: 4px;
+        right: 4px;
+        bottom: 4px;
+        border-radius: 18px;
+    }
+
+    .ShadowBox:before {
+        content: "";
+        background: rgba(0,0,0,0.2);
+    }
+
+    .ShadowBox:after {
+        content: "";
+        background: rgba(0,0,0,0.4);
+    }
+
+.ShadowBoxContent {
+    background: 41px 0 #f2f2f2;
+    margin: 5px 6px 5px 6px;
+    border-radius: 16px;
+    border: 3px solid #aeaeae;
+    height: 100%;
+    width: 100%;
+}
+
+.PopupButtonStyle {
+    padding: 5px 7px 3px 7px;
+    text-align: center;
+    background: 0 0 url('/lib/QrCode/image/Btn_XiP_BG.png') repeat-x;
+    background-size: auto 100%;
+    border-radius: 10px;
+    border: 2px solid #797979;
+    background-color: rgba(0, 0, 0, 0.50);
+    min-height: 32px;
+    font-size: 19px;
+    color: #000000; /* AS added. Not sure what is overriding #body color: white */
+	margin-bottom: 3px;
+}
+
+    .PopupButtonStyle:hover, .PopupButtonStyle:focus {
+        border: 2px solid #797979;
+		color: #ffffff;
+        padding: 5px 7px 3px 7px;
+    }
+
+button.PopupButtonStyle {
+    font-weight: bold;
+    font-size: 19px;
+}
+
+button.PopupButtonStyle.FloatRight {
+    float: right;
+}
+.qrCodeWrapper {
+    margin: 10%;
+    vertical-align: center;
+    float: left;
+    border: 10px solid white; /* The border is important to let the scanners find the image */
+}
+
+/* ############## Button Styles #############*/
+
+.ShadowBoxBtnWrap {
+    position: relative;
+    z-index: 1;
+    background: rgba(0,0,0,0.1);
+    border-radius: 14px;
+    border: 0px solid transparent;
+    margin: 10px;
+    padding: 3px 3px 3px 3px;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+}
+
+    .ShadowBoxBtnWrap:before {
+        position: absolute;
+        z-index: -1;
+        top: 1px;
+        left: 1px;
+        right: 1px;
+        bottom: 1px;
+        border-radius: 13px;
+        content: "";
+        background: rgba(0,0,0,0.2);
+    }
+
+
+    .ShadowBoxBtnWrap:after {
+        position: absolute;
+        z-index: -1;
+        top: 2px;
+        left: 2px;
+        right: 2px;
+        bottom: 2px;
+        border-radius: 12px;
+        content: "";
+        background: rgba(0,0,0,0.4);
+    }
+
+@media only screen and (max-width: 320px) {
+    .popupwrap {
+        max-height: 320px;
+        max-width: 320px;
+    }
+}
+
+/* *********************** Copied from bootstrap.css as there were css conflicts ****/
+/* TODO: DO we want to fade out the background as done by bootstrap.css*/
+.btn-group, .btn-group-vertical {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
+
+    .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .btn-group > .btn:first-child {
+        margin-left: 20px;
+    }
+
+    .btn-group > .btn:hover, .btn-group-vertical > .btn:hover, .btn-group > .btn:focus, .btn-group-vertical > .btn:focus, .btn-group > .btn:active, .btn-group-vertical > .btn:active, .btn-group > .btn.active, .btn-group-vertical > .btn.active {
+        z-index: 2;
+    }
+
+    .btn-group > .btn, .btn-group-vertical > .btn {
+        position: relative;
+    }
+
+.btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background-image: none;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background-color: #ff760e;
+    border-color: #285e8e;
+    color: #000;
+}
+
+.btn:active, .btn.active {
+    background-image: none;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.125) inset;
+    outline: 0 none;
+}
+
+.btn-primary {
+    background-color: #ff760e;
+	border: 1px solid #285e8e;
+    border-color: #285e8e;
+    color: #fff;
+}
+
+.btn {
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid #285e8e;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+label {
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    max-width: 100%;
+}

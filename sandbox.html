@@ -1,0 +1,28 @@
+﻿<html lang="en">
+<head>
+    <script data-main="sandbox.js" src="/lib/ThirdParty/require-2.1.15.js"></script>
+
+    <title>Sandbox</title>
+</head>
+    <body ng-controller="GuidedHelpController" data-ng-init="introState='IntroductionState'" ng-cloak>
+        <div class="activeStateBorder">
+            <p style="color:black">Some Text</p>
+        </div>
+        <p>actual image</p>
+        <img src="GuidedHelp/image/2/6/235451DISHHopperNetwork05Menu.jpg" />
+        <br /><p>hiddenDiv</p>
+        <div id="hiddenDiv" style="border: 2px solid blue"></div>
+        <br /><p>straightDiv / 2</p>
+        <div id="straightDiv" style="width:173px; height:246px; border: 2px solid red">
+            <canvas id="straightCanvas" class="primarydiagram"></canvas>
+        </div>
+        <br /><p>testDiv / 16</p>
+        <div style="width: 500px; height: 500px; border: 2px solid purple">
+            <!-- 540 x 270 -->
+            <div class="DiagramWrap" style="float: left">
+                <canvas id="testCanvas" class="primarydiagram"></canvas>
+            </div>
+        </div>
+
+    </body>
+</html>

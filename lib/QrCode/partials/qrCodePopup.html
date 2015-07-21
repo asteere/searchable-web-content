@@ -1,0 +1,29 @@
+﻿<div>
+    <link rel="stylesheet" type="text/css" ng-href="/lib/QrCode/css/qrCodePopup.css" />
+
+    <div class="popupwrap">
+        <div class="popupBox">
+            <div class="ShadowBox">
+                <div class="ShadowBoxContent">
+                    <div class="popupheader">
+                        <label class="popuplefttext">{{modalOptions.headerText}}</label>
+                        <label class="popuprighttext">{{modalOptions.headerText2}}</label>
+                    </div>
+                    <div class="popupmain">
+                        <div class="popuptext" ng-bind-html="modalOptions.bodyText"></div>
+                        <div class="qrCodeWrapper">
+                            <div id="qrcode" create-qr-code></div>
+                        </div>
+                        <div class="popupcontrols">
+                            <div class="ShadowBoxBtnWrap" ng-repeat="button in buttons" style="float: left; margin: 0px 5px;">
+                                <button type="button" class="PopupButtonStyle" data-ng-click="executeButton(button)" custom-autofocus="{{button.focus}}" modal-popup-button>
+                                    {{button.text}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

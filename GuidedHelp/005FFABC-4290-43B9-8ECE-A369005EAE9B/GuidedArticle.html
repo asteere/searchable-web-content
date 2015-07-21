@@ -1,0 +1,177 @@
+﻿<html lang="en">
+<head>
+    <script data-main="/GuidedHelp/js/guidedHelp_app.js" src="/lib/ThirdParty/require-2.1.15.js"></script>
+
+    <title>GA: Troubleshoot Network Connection</title>
+</head>
+<body ng-controller="GuidedHelpController" data-ng-init="introState='IntroductionState'; isArticle=true" ng-cloak>
+    <img id="spinner_img" src="../CommonResources/spinner.png" ng-hide="areDiagramsReady()" />
+
+    <div id="States" ng-show="areDiagramsReady()">
+        <div id="IntroductionState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        1. If your Hopper receiver is having trouble connecting to the Internet because of connectivity problems on your home network, a recent power outage, or some other reason, you may need to reset its connection to the Internet. Follow the solution below to learn how.
+                    </div>
+                </div>
+
+                <div diagram-wrap>
+                    <!-- div background-image src="../image/1/1/279015HopperHDMI00Side.jpg"></div> -->
+
+                    <video width="400" controls="controls" autoplay="autoplay">
+                        <source src="/GuidedHelp/video/ResetTheReceiver_x264.mp4" type="video/mp4">
+                        <source src="/GuidedHelp/video/ResetTheReceiver_libtheora.ogv" type="video/ogg" />
+                        <source src="/GuidedHelp/video/ResetTheReceiver_VP8.webm" type="video/webm" />
+
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            </div>
+
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('WithYourTVState')" class="ButtonStyle">Next</a>
+            </div>
+        </div>
+
+        <div id="WithYourTVState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        2. With your TV and receiver on, press "MENU".
+                    </div>
+                </div>
+
+                <div diagram-wrap>
+                    <div background-image src="../image/2/6/235451DISHHopperNetwork05Menu.jpg"></div>
+                </div>
+            </div>
+
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('IntroductionState')" class="ButtonStyle">Previous</a>
+                <a ng-click="goToState('NavigateToSettingsState')" class="ButtonStyle">Next</a>
+            </div>
+        </div>
+
+
+        <div id="NavigateToSettingsState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        3. Navigate to "Settings", and then press "Select" on your remote
+                    </div>
+                </div>
+
+                <div diagram-wrap>
+                    <div background-image src="../image/2/6/235451DISHHopperNetwork06Settings.jpg"></div>
+                </div>
+            </div>
+
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('WithYourTVState')" class="ButtonStyle">Previous</a>
+                <a ng-click="goToState('NavigateToNetworkSetupState')" class="ButtonStyle">Next</a>
+            </div>
+        </div>
+
+        <div id="NavigateToNetworkSetupState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        4. Navigate to "Network Setup", and then press "Select".
+                    </div>
+                </div>
+
+                <div diagram-wrap>
+                    <div background-image src="../image/2/6/235451DISHHopperNetwork07Network.jpg"></div>
+                </div>
+            </div>
+
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('NavigateToSettingsState')" class="ButtonStyle">Previous</a>
+                <a ng-click="goToState('NavigateToBroadbandState')" class="ButtonStyle">Next</a>
+            </div>
+        </div>
+
+
+        <div id="NavigateToBroadbandState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        5. Navigate to "Broadband", and then press "Select".
+                    </div>
+                </div>
+
+                <div diagram-wrap>
+                    <div background-image src="../image/4/1/235451DISHHopperNetwork08Broadband.jpg"></div>
+                </div>
+            </div>
+
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('NavigateToNetworkSetupState')" class="ButtonStyle">Previous</a>
+                <a ng-click="goToState('NavigateToResetConnectionState')" class="ButtonStyle">Next</a>
+            </div>
+        </div>
+
+
+        <div id="NavigateToResetConnectionState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        6. Navigate to "Reset Connection", and press "Select".
+                    </div>
+                </div>
+
+                <div diagram-wrap>
+                    <div background-image src="../image/7/4/235534DISHHopperInternet05Reset.jpg"></div>
+                </div>
+            </div>
+
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('NavigateToBroadbandState')" class="ButtonStyle">Previous</a>
+                <a ng-click="goToState('EnsureThatYourState')" class="ButtonStyle">Next</a>
+            </div>
+        </div>
+
+
+        <div id="EnsureThatYourState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        7. Ensure that your "DHCP Acquired", "Server Connection", and "Internet Connection" all have "OK" statuses next to them.
+                    </div>
+                </div>
+
+                <div diagram-wrap>
+                    <div background-image src="../image/9/9/235451DISHHopperNetwork09Connectivity.jpg"></div>
+                </div>
+            </div>
+
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('NavigateToResetConnectionState')" class="ButtonStyle">Previous</a>
+                <a ng-click="goToState('YouShouldNowState')" class="ButtonStyle">Next</a>
+            </div>
+        </div>
+
+
+        <div id="YouShouldNowState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        8. You should now know how to reset your DVR's connection to the Internet.
+                        You should now have access to your receiver using DISH Anywhere and be able to rent movies
+                        using Blockbuster @Home from your TV.
+                    </div>
+                </div>
+
+                <div diagram-wrap>
+                    <div background-image src="../CommonResources/smiley-face.png"></div>
+                </div>
+            </div>
+
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('EnsureThatYourState')" class="ButtonStyle">Previous</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

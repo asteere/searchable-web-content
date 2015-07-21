@@ -1,0 +1,245 @@
+﻿/* Although angularjs will add the next style, the browser will load the css file before angular runs.
+ * Resulting effect is a partial display, spinning image, final display 
+ */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none;
+}
+
+/*
+ Original Bootstrap's CSS depends on empty href attributes to style 
+ cursors for several components (pagination, tabs etc.). But in AngularJS 
+ adding empty href attributes to link tags will cause unwanted route 
+ changes. This is why we need to remove empty href attributes from 
+ directive templates and as a result styling is not applied correctly. 
+ The remedy is simple, just add the following styling to your application:
+*/
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+    font-family: Swis721 BT;
+    font-weight: bold;
+    text-align: left;
+    font-size: 24pt;
+    color: white;
+    position: relative;
+}
+
+p {
+    display: inline-block;
+}
+
+a.ButtonStyle, a.ButtonStyleAnchor, a.ButtonStyleDisabled, a.ButtonStyleAnchorDisabled, a.ButtonStyleSelected {
+    padding: 5px 7px 3px 7px;
+    text-align: center;
+    background: 0 0 url('/GuidedHelp/image/Btn_XiP_BG.png') repeat-x;
+    background-size: auto 100%;
+    border-radius: 10px;
+    border: 2px solid #797979;
+    background-color: rgba(0, 0, 0, 0.50);
+    min-height: 32px;
+    min-width: 165px;
+    font-size: 19px;
+    float: left;
+    margin-left: 5px;
+    color: #1e1e1e;
+    display: inline;
+}
+
+    a.ButtonStyle:hover, a.ButtonStyle:focus, a.ButtonStyleSelected {
+        border: 2px solid #797979;
+        padding: 5px 7px 3px 7px;
+        color: white;
+        text-decoration: none;
+    }
+
+    a.ButtonStyle:last-child {
+        margin-right: 6px;
+    }
+
+.ButtonStyleAnchor:hover, .ButtonStyleAnchor:focus {
+    border: 2px solid white !important;
+    padding: 3px 5px 1px 5px;
+}
+
+#spinner_img {
+    position: absolute;
+    top: 10px;
+    left: 150px;
+    height: 100px;
+    width: 100px;
+    background-color: transparent;
+    overflow: hidden;
+    text-align: center;
+}
+
+
+/***************************************** Guided Help Viewer Styles **********************/
+.StateWrapper {
+    background: #f2f2f2;
+    height: 100%;
+    width: 100%;
+    max-width: 1280px;
+    border: 2px solid #aeaeae;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+    .StateWrapper .TextAndDiagram {
+        border-radius: 12px;
+        position: relative;
+        margin-top: 1%;
+        left: 2%;
+        height: 78%;
+        max-height: 600px; /* Keep this in sync with GuidedHelpConstants */
+        width: 94%;
+        background: none repeat scroll 0 0 #d8dce5;
+        border: 2px solid #797979;
+        overflow: hidden; /* Force the container to size the children */
+    }
+
+    .StateWrapper .TextWrap {
+        padding-top: 1%;
+        padding-left: 1%;
+        height: 96%;
+        width: 49%;
+        float: left;
+        overflow-y: auto;
+    }
+
+    .StateWrapper .Text {
+        font-size: 19px;
+        color: black;
+        width: 100%;
+    }
+
+    .StateWrapper .DiagramWrap {
+        height: 95%;
+        width: 45%;
+        float: right;
+        display: block;
+        padding-top: 1%;
+        min-height: 300px;
+    }
+
+        .StateWrapper .DiagramWrap .primarydiagram {
+            width: auto;
+            height: auto;
+        }
+
+    .StateWrapper .helpviewerallcontrols {
+        position: relative;
+        padding-top: .5%;
+        padding-bottom: .5%;
+        left: 4%;
+        width: 97.5%; /* TODO: why do we need to reduce this by a smidgen? */
+        overflow: hidden; /* force container to resize to buttons*/
+    }
+
+.stateWrapperBottomMargin {
+    margin-bottom: 10px;
+}
+
+.FloatRight {
+    float: right;
+}
+
+/* **************************** Progress Bar Styles **************************** */
+
+.CenterWrap {
+    vertical-align: middle;
+    display: inline;
+    margin-left: 20%;
+    margin-top: 2%;
+    padding-left: 1.5%;
+    width: 80%;
+    height: 30px; /* provide a height source so the background image will display */
+    padding-left: .5%;
+}
+
+.ProgressBar {
+    display: inline-block;
+    padding-right: 6px;
+}
+
+    .ProgressBar:last-child {
+        padding-right: 0;
+    }
+
+.itemDone {
+    float: left;
+    height: 15px;
+    width: 15px;
+    background: top left url('../image/DotDone.png') no-repeat;
+}
+
+.itemNotDone {
+    float: left;
+    height: 15px;
+    width: 15px;
+    background: top left url('../image/DotNotDone.png') no-repeat;
+}
+
+/* **************************** Progress Bar Styles **************************** */
+
+.imgSettings {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    float: right;
+    margin-right: 2%;
+    float: right;
+    display: inline;
+}
+
+.activeStateBorder {
+    border: 5px solid black;
+}
+
+/* **************************** Resolution Dependent View Styles **************************** */
+@media only screen and (max-width: 500px) {
+    .StateWrapper {
+        height: 100%;
+        max-height: none;
+        float: none;
+    }
+
+        .StateWrapper .TextWrap {
+            float: none;
+        }
+
+        .StateWrapper .DiagramWrap {
+            float: none;
+            width: 100%;
+        }
+
+        .StateWrapper .helpviewerallcontrols {
+            width: 90%;
+        }
+
+    .CenterWrap {
+        display: none;
+    }
+
+    .imgSettings {
+        float: right;
+    }
+
+    a.ButtonStyle, a.ButtonStyleAnchor, a.ButtonStyleDisabled, a.ButtonStyleAnchorDisabled, a.ButtonStyleSelected {
+        min-width: 0;
+    }
+}

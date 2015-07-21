@@ -1,0 +1,103 @@
+facebook.github.io/react
+
+jsfiddle
+
+react - speed(60 fps)
+declarative
+composable
+
+download jsxtransformer and reactjs
+
+react vs knockout
+
+angularjs - framework to provide everything you need
+react - transforms model to ui
+
+people use react as alternative to backbone view component
+
+1. speed, declarative binding, composability
+
+react application made up of components == element in DOM
+
+nesting components are what makes composable
+
+top-level namespace is React
+
+React.createClass({
+    render: function() {
+        return some_html;
+    }
+});
+
+react transform jsx into javascript under the covers
+
+getbootstrap.com - mobile javascript library, requires jquery which is in distr.
+
+<script src="js/app.js" type="text/jsx"?</script>
+
+app.ja
+/** @jsx React.DOM */
+(function () {
+    'use strict';
+
+})();
+
+AI: What is (function() {})();
+
+Link top level react component to DOM
+React.renderComponent(<Hello now={new Date().toString()} />, document.body)
+
+renderComponent Hellow referes to the Hello class
+
+mongoose small web server
+
+CORS issues are from running from a file rather than a server
+
+AI: What is CORS errors
+
+React props are xml attributes
+
+javascript code in attribute are enclosed in {}, text in quotes
+
+this.props.now
+this.
+
+React.createClass({
+    getInitialState: function() {
+        return {counter: 1};
+    },
+    render: function() {
+        return <h1>{this.state.counter}</h1>;
+    }
+});
+
+setState - updates the state merging old and new, causes component to be rerendered
+
+attribute def'n precendence over defaultProps
+
+Use React.propTypes to validate properties
+var Hello = React.createClass({
+    propTypes: { now: React.PropTypes.OneOf['Red', 'Green']) }
+    render:
+});
+
+Mixins allow common code to be merged into many components
+
+var Count = React.createClass({
+    mixins: [Mixin1, Mixin2]
+})
+
+Components map to equivalent DOM nodes
+Props immutable data for components (xml attr)
+
+http://facebook.github.io/react/jsx-compiler.html
+jsx xforms jsx to javascript
+
+npm install -g react-tools
+jsx jsxdirectory/ compiledjs
+jsx --watch jsxdirectory/ compiledjs/ # compiledjs always in sync
+
+jsx attr -> react component props
+<Hello now={any javascript expression} />
+
+

@@ -1,0 +1,392 @@
+﻿<html lang="en">
+<head>
+    <script data-main="/GuidedHelp/js/guidedHelp_app.js" src="/lib/ThirdParty/require-2.1.15.js"></script>
+
+    <title>Modem Motorola SBG6580 Hopper913</title>
+</head>
+<body ng-controller="GuidedHelpController" data-ng-init="introState='IntroductionState'" ng-cloak>
+    <img id="spinner_img" src="../CommonResources/spinner.png" ng-hide="areDiagramsReady()" />
+
+    <div id="States" ng-show="areDiagramsReady()">
+        <div id="IntroductionState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Resetting the Hopper did not restore your internet connection.<br />Follow the guided steps to further troubleshoot your internet connection.
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/ModemFrontView.png"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('CheckModemPowerLEDState01')" class="ButtonStyle">Begin</a>
+                <a ng-click="goToState('Exit')" class="ButtonStyle">Cancel</a>
+            </div>
+        </div>
+        <div id="CheckModemPowerLEDState01" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Is the modem power indicator lit?
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/ModemFrontView.png"></div>
+                    <div overlay-image src="../CommonResources/ArrowLeft.png" x="253" y="38"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('CheckWANLEDState00')" class="ButtonStyle">Yes</a>
+                <a ng-click="goToState('CheckPowerCableConnectionTypeState')" class="ButtonStyle">No</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="CheckPowerCableConnectionTypeState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        What is the power source for your modem?
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../CommonResources/PowerSourceType.png"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('CheckModemPowerSourceState')" class="ButtonStyle">Wall Outlet</a>
+                <a ng-click="goToState('CheckModemPowerStripConnection')" class="ButtonStyle">Power Strip</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="CheckModemPowerSourceState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Ensure the power cord is plugged into the wall outlet.<br />Is the modem power indicator now lit?
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/ModemFrontView.png"></div>
+                    <div overlay-image src="../CommonResources/ArrowLeft.png" x="253" y="38"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('CheckWANLEDState01')" class="ButtonStyle">Yes</a>
+                <a ng-click="goToState('CheckModemPowerSourceToDeviceState')" class="ButtonStyle">No</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="CheckModemPowerSourceToDeviceState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Is the power cord connected to your modem?
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/ModemBackView.png"></div>
+                    <div overlay-image src="../CommonResources/ArrowLeft.png" x="319" y="317"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('CheckModemPowerLEDState03')" class="ButtonStyle">Yes</a>
+                <a ng-click="goToState('ConnectModemPowerSourceDeviceState')" class="ButtonStyle">No</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="ConnectModemPowerSourceDeviceState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Ensure the power cord is plugged into the  modem's power port.<br />Is the modem power indicator now lit?
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/ModemBackView.png"></div>
+                    <div overlay-image src="../CommonResources/ArrowLeft.png" x="319" y="317"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('CheckWANLEDState01')" class="ButtonStyle">Yes</a>
+                <a ng-click="goToState('FaultyCableOrDeviceStatePOWER')" class="ButtonStyle">No</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="CheckModemPowerStripConnection" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Ensure the modem's power cord is plugged in to the power strip and the power strip is plugged into the wall outlet and powered on?<br />Is the modem power indicator now lit?
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../CommonResources/PowerSurgeStrip.png"></div>
+                    <div overlay-image src="../CommonResources/ArrowRight.png" x="90" y="35"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('CheckWANLEDState01')" class="ButtonStyle">Yes</a>
+                <a ng-click="goToState('CheckModemPowerStripToDeviceState')" class="ButtonStyle">No</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="CheckModemPowerStripToDeviceState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Is the power cord connected to your modem?
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/ModemBackView.png"></div>
+                    <div overlay-image src="../CommonResources/ArrowLeft.png" x="319" y="317"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('CheckModemPowerLEDState03')" class="ButtonStyle">Yes</a>
+                <a ng-click="goToState('ConnectModemPowerSourceDeviceState')" class="ButtonStyle">No</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="CheckModemPowerLEDState03" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Is the modem power indicator now lit?
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/ModemFrontView.png"></div>
+                    <div overlay-image src="../CommonResources/ArrowLeft.png" x="253" y="38"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('CheckWANLEDState01')" class="ButtonStyle">Yes</a>
+                <a ng-click="goToState('FaultyCableOrDeviceStatePOWER')" class="ButtonStyle">No</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="CheckWANLEDState01" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Wait for the modem to restart - this may take up to 60 seconds.<br />Once restarted, are the receive, send, and online indicators now flashing / lit?
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/ModemFrontView.png"></div>
+                    <div overlay-image src="../CommonResources/ArrowRight.png" x="112" y="88"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('CheckWIFILINKLEDState01')" class="ButtonStyle">Yes</a>
+                <a ng-click="goToState('CheckModemInternetSourceState')" class="ButtonStyle">No</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="CheckWANLEDState00" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Are the receive, send, and online indicators flashing / lit?
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/ModemFrontView.png"></div>
+                    <div overlay-image src="../CommonResources/ArrowRight.png" x="112" y="88"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('CheckWIFILINKLEDState01')" class="ButtonStyle">Yes</a>
+                <a ng-click="goToState('CheckModemInternetSourceState')" class="ButtonStyle">No</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="CheckModemInternetSourceState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Ensure the coaxial cable is securely connected to a cable outlet.<br />Are the receive, send, and online indicators now flashing / lit?
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/WallSourceInternetCableLights.png"></div>
+                    <div overlay-image src="../CommonResources/ArrowUp.png" x="233" y="237"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('CheckWIFILINKLEDState01')" class="ButtonStyle">Yes</a>
+                <a ng-click="goToState('CheckModemInternetSourceDeviceState')" class="ButtonStyle">No</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="CheckModemInternetSourceDeviceState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Ensure the coaxial cable is securely connected to the modem?<br />Are the receive, send, and online indicators now flashing / lit?
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/ModemBackView.png"></div>
+                    <div overlay-image src="../CommonResources/ArrowLeft.png" x="319" y="265"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('CheckWIFILINKLEDState01')" class="ButtonStyle">Yes</a>
+                <a ng-click="goToState('DisconnectPowerCable')" class="ButtonStyle">No</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="DisconnectPowerCable" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Disconnect the power cord from the back of the modem for 10 seconds, then reconnect it. <br />Wait for the modem to restart - this may take up to 60 seconds.<br />Are the receive, send, and online indicators now flashing / lit?
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/ModemBackView.png"></div>
+                    <div overlay-image src="../CommonResources/ArrowLeft.png" x="319" y="317"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('CheckWIFILINKLEDState01')" class="ButtonStyle">Yes</a>
+                <a ng-click="goToState('FaultyCableDeviceOrServiceWAN')" class="ButtonStyle">No</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="CheckWIFILINKLEDState01" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Is the wireless indicator lit?
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/ModemFrontView.png"></div>
+                    <div overlay-image src="../CommonResources/ArrowLeft.png" x="253" y="157"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('TestConnectionWiFi')" class="ButtonStyle">Yes</a>
+                <a ng-click="goToState('CheckWirelessEnabledOnDeviceState')" class="ButtonStyle">No</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="CheckWirelessEnabledOnDeviceState" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Ensure wireless is enabled on your modem. Is the wireless indicator now lit?
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/ModemFrontView.png"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('TestConnectionWiFi')" class="ButtonStyle">Yes</a>
+                <a ng-click="goToState('FaultyCableDeviceOrServiceWiFi')" class="ButtonStyle">No</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="FaultyCableOrDeviceStatePOWER" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        The troubleshooting steps failed to repair your connection.<br />Please contact Comcast for further assistance.
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../CommonResources/FaultView.png"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('Exit')" class="ButtonStyle">Exit</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="FaultyCableDeviceOrServiceWAN" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        The troubleshooting steps failed to repair your connection.<br />Please contact Comcast for further assistance.
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../CommonResources/FaultView.png"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('Exit')" class="ButtonStyle">Exit</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="FaultyCableDeviceOrServiceWiFi" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        The troubleshooting steps failed to repair your connection.<br />Please contact Comcast for further assistance.
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../CommonResources/FaultView.png"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('Exit')" class="ButtonStyle">Exit</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="TestConnectionWiFi" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Your modem has successfully passed the diagnostic tests.
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/ModemFrontView.png"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('Exit')" class="ButtonStyle">Exit</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="TestConnection" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        Your modem has successfully passed the diagnostic tests.
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../image/ModemFrontView.png"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('Exit')" class="ButtonStyle">Exit</a>
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+        <div id="Exit" show-state="currentState" class="StateWrapper">
+            <div class="TextAndDiagram">
+                <div class="TextWrap">
+                    <div class="Text">
+                        You are finished. Please close the window/tab.
+                    </div>
+                </div>
+                <div diagram-wrap>
+                    <div background-image src="../CommonResources/smiley-face.png"></div>
+                </div>
+            </div>
+            <div class="helpviewerallcontrols">
+                <a ng-click="goToState('previousState')" class="ButtonStyle FloatRight">Back</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

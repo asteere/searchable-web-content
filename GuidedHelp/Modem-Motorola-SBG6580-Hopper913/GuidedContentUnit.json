@@ -1,0 +1,2268 @@
+{
+  "DecisionTree": {
+    "Key": "Modem-Motorola-SBG6580-Hopper913",
+    "Settings": {
+      "StartState": {
+        "Link": "IntroductionState"
+      }
+    },
+    "States": {
+      "State": [
+        {
+          "Key": "IntroductionState",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewIntro"
+            },
+            {
+              "ReplaceWith": "IntroDiagram"
+            }
+          ],
+          "Question": "Resetting the Hopper did not restore your internet connection.br;Follow the guided steps to further troubleshoot your internet connection.",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "CheckModemPowerLEDState01",
+                "text": "Begin"
+              },
+              {
+                "Action": "Exit",
+                "Link": "",
+                "text": "Cancel"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "CheckModemPowerLEDState01",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewIntro"
+            },
+            {
+              "ReplaceWith": "ModemPowerLEDDiagram"
+            }
+          ],
+          "Question": "Is the modem power indicator lit?",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "CheckWANLEDState00",
+                "text": "Yes"
+              },
+              {
+                "Action": "GoToState",
+                "Link": "CheckPowerCableConnectionTypeState",
+                "text": "No"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "CheckPowerCableConnectionTypeState",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewIntro"
+            },
+            {
+              "ReplaceWith": "ModemPowerConnectionTypeDiagram"
+            }
+          ],
+          "Question": "What is the power source for your modem?",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "CheckModemPowerSourceState",
+                "text": "Wall Outlet"
+              },
+              {
+                "Action": "GoToState",
+                "Link": "CheckModemPowerStripConnection",
+                "text": "Power Strip"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "CheckModemPowerSourceState",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewPowerLEDOn"
+            },
+            {
+              "ReplaceWith": "ModemPowerLEDDiagram"
+            }
+          ],
+          "Question": "Ensure the power cord is plugged into the wall outlet.br;Is the modem power indicator now lit?",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "CheckWANLEDState01",
+                "text": "Yes"
+              },
+              {
+                "Action": "GoToState",
+                "Link": "CheckModemPowerSourceToDeviceState",
+                "text": "No"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "CheckModemPowerSourceToDeviceState",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewPowerLEDOn"
+            },
+            {
+              "ReplaceWith": "ModemPowerSourceToDeviceDiagram"
+            }
+          ],
+          "Question": "Is the power cord connected to your modem?",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "CheckModemPowerLEDState03",
+                "text": "Yes"
+              },
+              {
+                "Action": "GoToState",
+                "Link": "ConnectModemPowerSourceDeviceState",
+                "text": "No"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "ConnectModemPowerSourceDeviceState",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewPowerNotConnected"
+            },
+            {
+              "ReplaceWith": "ModemPowerSourceToDeviceDiagram"
+            }
+          ],
+          "Question": "Ensure the power cord is plugged into the  modem's power port.br;Is the modem power indicator now lit?",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "CheckWANLEDState01",
+                "text": "Yes"
+              },
+              {
+                "Action": "GoToState",
+                "Link": "FaultyCableOrDeviceStatePOWER",
+                "text": "No"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "CheckModemPowerStripConnection",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewIntro"
+            },
+            {
+              "ReplaceWith": "ModemPowerStripDiagram"
+            }
+          ],
+          "Question": "Ensure the modem's power cord is plugged in to the power strip and the power strip is plugged into the wall outlet and powered on?br;Is the modem power indicator now lit?",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "CheckWANLEDState01",
+                "text": "Yes"
+              },
+              {
+                "Action": "GoToState",
+                "Link": "CheckModemPowerStripToDeviceState",
+                "text": "No"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "CheckModemPowerStripToDeviceState",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewPowerLEDOn"
+            },
+            {
+              "ReplaceWith": "ModemPowerSourceToDeviceDiagram"
+            }
+          ],
+          "Question": "Is the power cord connected to your modem?",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "CheckModemPowerLEDState03",
+                "text": "Yes"
+              },
+              {
+                "Action": "GoToState",
+                "Link": "ConnectModemPowerSourceDeviceState",
+                "text": "No"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "CheckModemPowerLEDState03",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewPowerConnected"
+            },
+            {
+              "ReplaceWith": "ModemPowerLEDDiagram"
+            }
+          ],
+          "Question": "Is the modem power indicator now lit?",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "CheckWANLEDState01",
+                "text": "Yes"
+              },
+              {
+                "Action": "GoToState",
+                "Link": "FaultyCableOrDeviceStatePOWER",
+                "text": "No"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "CheckWANLEDState01",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewPowerConnected"
+            },
+            {
+              "ReplaceWith": "WANLEDDiagram"
+            }
+          ],
+          "Question": "Wait for the modem to restart - this may take up to 60 seconds.br;Once restarted, are the receive, send, and online indicators now flashing / lit?",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "CheckWIFILINKLEDState01",
+                "text": "Yes"
+              },
+              {
+                "Action": "GoToState",
+                "Link": "CheckModemInternetSourceState",
+                "text": "No"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "CheckWANLEDState00",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewPowerConnected"
+            },
+            {
+              "ReplaceWith": "WANLEDDiagram"
+            }
+          ],
+          "Question": "Are the receive, send, and online indicators flashing / lit?",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "CheckWIFILINKLEDState01",
+                "text": "Yes"
+              },
+              {
+                "Action": "GoToState",
+                "Link": "CheckModemInternetSourceState",
+                "text": "No"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "CheckModemInternetSourceState",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewPowerConnected"
+            },
+            {
+              "ReplaceWith": "ModemInternetSourceDiagram"
+            }
+          ],
+          "Question": "Ensure the coaxial cable is securely connected to a cable outlet.br;Are the receive, send, and online indicators now flashing / lit?",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "CheckWIFILINKLEDState01",
+                "text": "Yes"
+              },
+              {
+                "Action": "GoToState",
+                "Link": "CheckModemInternetSourceDeviceState",
+                "text": "No"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "CheckModemInternetSourceDeviceState",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewWANLEDOn"
+            },
+            {
+              "ReplaceWith": "ModemInternetSourceDeviceDiagram"
+            }
+          ],
+          "Question": "Ensure the coaxial cable is securely connected to the modem?br;Are the receive, send, and online indicators now flashing / lit?",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "CheckWIFILINKLEDState01",
+                "text": "Yes"
+              },
+              {
+                "Action": "GoToState",
+                "Link": "DisconnectPowerCable",
+                "text": "No"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "DisconnectPowerCable",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewWANLEDOn"
+            },
+            {
+              "ReplaceWith": "ModemPowerSourceToDeviceDiagram"
+            }
+          ],
+          "Question": "Disconnect the power cord from the back of the modem for 10 seconds, then reconnect it. br;Wait for the modem to restart - this may take up to 60 seconds.br;Are the receive, send, and online indicators now flashing / lit?",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "CheckWIFILINKLEDState01",
+                "text": "Yes"
+              },
+              {
+                "Action": "GoToState",
+                "Link": "FaultyCableDeviceOrServiceWAN",
+                "text": "No"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "CheckWIFILINKLEDState01",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewWIFILEDToDeviceUknown"
+            },
+            {
+              "ReplaceWith": "WIFILEDDiagram"
+            }
+          ],
+          "Question": "Is the wireless indicator lit?",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "TestConnectionWiFi",
+                "text": "Yes"
+              },
+              {
+                "Action": "GoToState",
+                "Link": "CheckWirelessEnabledOnDeviceState",
+                "text": "No"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "CheckWirelessEnabledOnDeviceState",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewWIFILEDToDeviceUknown"
+            },
+            {
+              "ReplaceWith": "IntroDiagram"
+            }
+          ],
+          "Question": "Ensure wireless is enabled on your modem. Is the wireless indicator now lit?",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "GoToState",
+                "Link": "TestConnectionWiFi",
+                "text": "Yes"
+              },
+              {
+                "Action": "GoToState",
+                "Link": "FaultyCableDeviceOrServiceWiFi",
+                "text": "No"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "FaultyCableOrDeviceStatePOWER",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewFaultyPOWER"
+            },
+            {
+              "ReplaceWith": "FaultyCableOrDeviceDiagram"
+            }
+          ],
+          "Question": "The troubleshooting steps failed to repair your connection.br;Please contact Comcast for further assistance.",
+          "Answers": {
+            "Answer": {
+              "Action": "Exit",
+              "text": "Exit"
+            }
+          }
+        },
+        {
+          "Key": "FaultyCableDeviceOrServiceWAN",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewFaultyWAN"
+            },
+            {
+              "ReplaceWith": "FaultyCableDeviceOrServiceState"
+            }
+          ],
+          "Question": "The troubleshooting steps failed to repair your connection.br;Please contact Comcast for further assistance.",
+          "Answers": {
+            "Answer": {
+              "Action": "Exit",
+              "text": "Exit"
+            }
+          }
+        },
+        {
+          "Key": "FaultyCableDeviceOrServiceWiFi",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewFaultyWiFi"
+            },
+            {
+              "ReplaceWith": "FaultyCableDeviceOrServiceState"
+            }
+          ],
+          "Question": "The troubleshooting steps failed to repair your connection.br;Please contact Comcast for further assistance.",
+          "Answers": {
+            "Answer": {
+              "Action": "Exit",
+              "text": "Exit"
+            }
+          }
+        },
+        {
+          "Key": "TestConnectionWiFi",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewWIFILEDToPcYes"
+            },
+            {
+              "ReplaceWith": "IntroDiagram"
+            }
+          ],
+          "Question": "Your modem has successfully passed the diagnostic tests.",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "Exit",
+                "text": "Exit"
+              }
+            ]
+          }
+        },
+        {
+          "Key": "TestConnection",
+          "DiagramReplace": [
+            {
+              "ReplaceWith": "ModemOverviewWIFILEDToPcYes"
+            },
+            {
+              "ReplaceWith": "IntroDiagram"
+            }
+          ],
+          "Question": "Your modem has successfully passed the diagnostic tests.",
+          "Answers": {
+            "Answer": [
+              {
+                "Action": "Exit",
+                "text": "Exit"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "Diagrams": {
+    "Diagram": [
+      {
+        "Key": "IntroDiagram",
+        "Location": "Primary",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemFrontView"
+          }
+        },
+        "Overlays": null
+      },
+      {
+        "Key": "ModemPowerConnectionTypeDiagram",
+        "Location": "Primary",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "PowerSourceType"
+          }
+        },
+        "Overlays": null
+      },
+      {
+        "Key": "ModemPowerLEDDiagram",
+        "Location": "Primary",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemFrontView"
+          }
+        },
+        "Overlays": {
+          "Overlay": {
+            "ImageReplace": {
+              "ReplaceWith": "ArrowLeft"
+            },
+            "PositionReplace": {
+              "ReplaceWith": "ModemPowerLEDPosition"
+            }
+          }
+        }
+      },
+      {
+        "Key": "ModemPowerSourceToDeviceDiagram",
+        "Location": "Primary",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemBackView"
+          }
+        },
+        "Overlays": {
+          "Overlay": {
+            "ImageReplace": {
+              "ReplaceWith": "ArrowLeft"
+            },
+            "PositionReplace": {
+              "ReplaceWith": "ModemPowerSourceToDevicePosition"
+            }
+          }
+        }
+      },
+      {
+        "Key": "ModemPowerSourceDiagram",
+        "Location": "Primary",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemPowerSource"
+          }
+        },
+        "Overlays": {
+          "Overlay": {
+            "ImageReplace": {
+              "ReplaceWith": "ArrowUp"
+            },
+            "PositionReplace": {
+              "ReplaceWith": "ModemPowerSourcePosition"
+            }
+          }
+        }
+      },
+      {
+        "Key": "ModemPowerStripDiagram",
+        "Location": "Primary",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "PowerSurgeStrip"
+          }
+        },
+        "Overlays": {
+          "Overlay": {
+            "ImageReplace": {
+              "ReplaceWith": "ArrowRight"
+            },
+            "PositionReplace": {
+              "ReplaceWith": "ModemPowerStripPosition"
+            }
+          }
+        }
+      },
+      {
+        "Key": "WANLEDDiagram",
+        "Location": "Primary",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemFrontView"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ArrowRight"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "ModemSendLEDPosition"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemInternetSourceDiagram",
+        "Location": "Primary",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "InternetSource"
+          }
+        },
+        "Overlays": {
+          "Overlay": {
+            "ImageReplace": {
+              "ReplaceWith": "ArrowUp"
+            },
+            "PositionReplace": {
+              "ReplaceWith": "ModemInternetSourcePosition"
+            }
+          }
+        }
+      },
+      {
+        "Key": "ModemInternetSourceDeviceDiagram",
+        "Location": "Primary",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemBackView"
+          }
+        },
+        "Overlays": {
+          "Overlay": {
+            "ImageReplace": {
+              "ReplaceWith": "ArrowLeft"
+            },
+            "PositionReplace": {
+              "ReplaceWith": "ModemInternetSourceDevicePosition"
+            }
+          }
+        }
+      },
+      {
+        "Key": "WIFILEDDiagram",
+        "Location": "Primary",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemFrontView"
+          }
+        },
+        "Overlays": {
+          "Overlay": {
+            "ImageReplace": {
+              "ReplaceWith": "ArrowLeft"
+            },
+            "PositionReplace": {
+              "ReplaceWith": "ModemWirelessLEDPosition"
+            }
+          }
+        }
+      },
+      {
+        "Key": "FaultyCableOrDeviceDiagram",
+        "Location": "Primary",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "FaultImage"
+          }
+        },
+        "Overlays": null
+      },
+      {
+        "Key": "FaultyCableDeviceOrServiceState",
+        "Location": "Primary",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "FaultImage"
+          }
+        },
+        "Overlays": null
+      },
+      {
+        "Key": "ModemOverviewIntro",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverview"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewPowerLEDOff",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverview"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewCritical"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewPowerLEDOn",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverview"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewPowerNotConnected",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverview"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewCritical"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewPowerConnected",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverview"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewWANLEDOn",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverview"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewWANLEDOff",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverview"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewCritical"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewWANLEDConnected",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverview"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewWANLEDNotConnected",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverview"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewCritical"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewWIFILEDToDeviceUknown",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverviewWireless"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewWiFiToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewWiFiToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewWIFILEDToDeviceYes",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverviewWireless"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewWiFiToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewWiFiToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewWIFILEDToDeviceNo",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverviewWireless"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewCritical"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewWiFiToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewWiFiToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewWIFILEDToPcYes",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverviewWireless"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewWiFiToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewSafe"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewWiFiToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewIntro",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverview"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewFaultyPOWER",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverview"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewCritical"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewCritical"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewFaultyWAN",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverview"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewCritical"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewCritical"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewCableToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Key": "ModemOverviewFaultyWiFi",
+        "Location": "Overview",
+        "Background": {
+          "ImageReplace": {
+            "ReplaceWith": "ModemOverviewWireless"
+          }
+        },
+        "Overlays": {
+          "Overlay": [
+            {
+              "ImageReplace": {
+                "ReplaceWith": "ModemThumbnail"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewModemThumbnail"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewPowerSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewUnknown"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewInternetSourceToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewCritical"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewWiFiToModemStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewCritical"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewWiFiToPCStatus"
+              }
+            },
+            {
+              "ImageReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              },
+              "PositionReplace": {
+                "ReplaceWith": "OverviewDeviceLabel"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Positions": {
+    "Position": [
+      {
+        "Key": "ModemPowerLEDPosition",
+        "X": "253",
+        "Y": "38"
+      },
+      {
+        "Key": "ModemPowerSourcePosition",
+        "X": "234",
+        "Y": "264"
+      },
+      {
+        "Key": "ModemPowerSourceToDevicePosition",
+        "X": "319",
+        "Y": "317"
+      },
+      {
+        "Key": "ModemPowerStripPosition",
+        "X": "90",
+        "Y": "35"
+      },
+      {
+        "Key": "ModemReceiveLEDPosition",
+        "X": "253",
+        "Y": "62"
+      },
+      {
+        "Key": "ModemSendLEDPosition",
+        "X": "112",
+        "Y": "88"
+      },
+      {
+        "Key": "ModemOnlineLEDPosition",
+        "X": "178",
+        "Y": "181"
+      },
+      {
+        "Key": "ModemInternetSourcePosition",
+        "X": "233",
+        "Y": "237"
+      },
+      {
+        "Key": "ModemInternetSourceDevicePosition",
+        "X": "319",
+        "Y": "265"
+      },
+      {
+        "Key": "ModemETHERNETLEDPosition",
+        "X": "404",
+        "Y": "25"
+      },
+      {
+        "Key": "ModemWirelessPosition",
+        "X": "373",
+        "Y": "-10"
+      },
+      {
+        "Key": "WirelessWavesPosition",
+        "X": "480",
+        "Y": "-10"
+      },
+      {
+        "Key": "ModemWirelessLEDPosition",
+        "X": "253",
+        "Y": "157"
+      },
+      {
+        "Key": "ModemEthernetPortPosition",
+        "X": "153",
+        "Y": "53"
+      },
+      {
+        "Key": "ModemEthernetCableToDevicePosition",
+        "X": "153",
+        "Y": "53"
+      },
+      {
+        "Key": "ModemEthernetCableToPCPosition",
+        "X": "233",
+        "Y": "266"
+      },
+      {
+        "Key": "OverviewModemThumbnail",
+        "X": "457",
+        "Y": "-12"
+      },
+      {
+        "Key": "OverviewPowerSourceStatus",
+        "X": "264",
+        "Y": "46"
+      },
+      {
+        "Key": "OverviewPowerSourceToModemStatus",
+        "X": "420",
+        "Y": "15"
+      },
+      {
+        "Key": "OverviewInternetSourceStatus",
+        "X": "173",
+        "Y": "103"
+      },
+      {
+        "Key": "OverviewInternetSourceToModemStatus",
+        "X": "420",
+        "Y": "54"
+      },
+      {
+        "Key": "OverviewCableToPCStatus",
+        "X": "805",
+        "Y": "54"
+      },
+      {
+        "Key": "OverviewWiFiToPCStatus",
+        "X": "775",
+        "Y": "54"
+      },
+      {
+        "Key": "OverviewCableToModemStatus",
+        "X": "562",
+        "Y": "54"
+      },
+      {
+        "Key": "OverviewWiFiToModemStatus",
+        "X": "589",
+        "Y": "54"
+      },
+      {
+        "Key": "OverviewEthernetCable",
+        "X": "652",
+        "Y": "59"
+      },
+      {
+        "Key": "OverviewDeviceLabel",
+        "X": "473",
+        "Y": "113"
+      }
+    ]
+  },
+  "Resources": {
+    "Images": {
+      "Image": [
+        {
+          "Key": "ModemThumbnail",
+          "Source": "Images/ModemThumbnail.png"
+        },
+        {
+          "Key": "ModemFrontView",
+          "Source": "Images/ModemFrontView.png"
+        },
+        {
+          "Key": "ModemBackView",
+          "Source": "Images/ModemBackView.png"
+        },
+        {
+          "Key": "ModemBackViewEthernetLED",
+          "Source": "Images/ModemBackViewEthernetLED.png"
+        },
+        {
+          "Key": "ModemOverview",
+          "Source": "../CommonResources/OverviewModemCableVertical.jpg"
+        },
+        {
+          "Key": "ModemOverviewWireless",
+          "Source": "../CommonResources/OverviewModemCableWirelessVertical.jpg"
+        },
+        {
+          "Key": "WirelessWaves",
+          "Source": "../CommonResources/WirelessWaves.png"
+        },
+        {
+          "Key": "ModemPowerSource",
+          "Source": "../CommonResources/WallSourcePower.png"
+        },
+        {
+          "Key": "PowerSurgeStrip",
+          "Source": "../CommonResources/PowerSurgeStrip.png"
+        },
+        {
+          "Key": "PowerSourceType",
+          "Source": "../CommonResources/PowerSourceType.png"
+        },
+        {
+          "Key": "InternetSource",
+          "Source": "Images/WallSourceInternetCableLights.png"
+        },
+        {
+          "Key": "PCView",
+          "Source": "../CommonResources/PortPCEthernet.png"
+        },
+        {
+          "Key": "ArrowUp",
+          "Source": "../CommonResources/ArrowUp.png"
+        },
+        {
+          "Key": "ArrowDown",
+          "Source": "../CommonResources/ArrowDown.png"
+        },
+        {
+          "Key": "ArrowLeft",
+          "Source": "../CommonResources/ArrowLeft.png"
+        },
+        {
+          "Key": "ArrowRight",
+          "Source": "../CommonResources/ArrowRight.png"
+        },
+        {
+          "Key": "FaultImage",
+          "Source": "../CommonResources/FaultView.png"
+        },
+        {
+          "Key": "FaultImageFull",
+          "Source": "../CommonResources/FaultViewFull.png"
+        },
+        {
+          "Key": "EthernetCable",
+          "Source": "../CommonResources/PortStatusEthernet.png"
+        },
+        {
+          "Key": "OverviewCritical",
+          "Source": "../CommonResources/StatusCritical.png"
+        },
+        {
+          "Key": "OverviewSafe",
+          "Source": "../CommonResources/StatusSafe.png"
+        },
+        {
+          "Key": "OverviewUnknown",
+          "Source": "../CommonResources/StatusUnknown.png"
+        },
+        {
+          "Key": "OverviewDeviceLabel",
+          "Source": "../CommonResources/LabelCableModem.png"
+        }
+      ]
+    }
+  }
+}
